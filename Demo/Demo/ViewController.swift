@@ -1,6 +1,7 @@
 import UIKit
 import Vision
 import CoreML
+import CoreMLHelpers
 
 class ViewController: UIViewController {
 
@@ -14,8 +15,6 @@ class ViewController: UIViewController {
 
     testImagePixelBufferConversion()
     testImagePixelBufferConversionGray()
-    testMultiArrayFromCoreMLArray()
-    testMultiArray()
   }
 
   override func didReceiveMemoryWarning() {
@@ -60,36 +59,5 @@ class ViewController: UIViewController {
         }
       }
     }
-  }
-
-  func testMultiArrayFromCoreMLArray() {
-    let coreMLArray = try! MLMultiArray(shape: [3, 4, 2], dataType: .double)
-    coreMLArray[[1, 2, 0] as [NSNumber]] = NSNumber(value: 3.14159)
-    print(coreMLArray)
-
-    var m = MultiArray<Double>(coreMLArray)
-    print(m.shape)
-    print(m[1, 2, 0])
-
-    m[1, 2, 0] = 2.71828
-    print(m[[1, 2, 0]])
-  }
-
-  func testMultiArray() {
-    var m = MultiArray<Float>(shape: [3, 4, 2])
-    print(m.shape)
-
-    for i in 0..<m.count {
-      m[i] = Float(i)
-    }
-    print(m)
-
-    let t = m.transposed([1, 2, 0])
-    print(t.shape)
-    print(t)
-
-    let r = m.reshaped([8, 3])
-    print(r.shape)
-    print(r)
   }
 }
