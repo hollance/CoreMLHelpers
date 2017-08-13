@@ -267,8 +267,18 @@ where `classLabelProbs` is the name of the model's output with the dictionary (t
 
 ## Non-maximum suppression (NMS)
 
-TODO
+For [object detection models](https://github.com/hollance/YOLO-CoreML-MPSNNGraph), you'll often end up with many bounding box predictions. Non-maximum suppression is used to only keep the best bounding boxes.
 
+To use NMS, put your bounding boxes in an array of `NMSPrediction` objects and call `nonMaxSuppression()`:
+
+```swift
+var predictions: [NMSPrediction] = ...
+
+let selected = nonMaxSuppression(predictions: predictions, limit: 10, threshold: 0.5)
+```
+
+This gives you an array with the indices of the best bounding boxes.
+    
 ## Other features
 
 New `Array` functions:

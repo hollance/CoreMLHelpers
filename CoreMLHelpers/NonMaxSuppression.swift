@@ -44,4 +44,54 @@ public func IOU(_ a: CGRect, _ b: CGRect) -> Float {
   return Float(intersectionArea / (areaA + areaB - intersectionArea))
 }
 
-//TODO: more to come here!
+public typealias NMSPrediction = (classIndex: Int, score: Float, rect: CGRect)
+
+/**
+  Removes bounding boxes that overlap too much with other boxes that have
+  a higher score.
+
+  Based on code from https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/kernels/non_max_suppression_op.cc
+
+  - Note: This version of NMS ignores the class of the bounding boxes.
+
+  - Parameters:
+    - predictions: an array of bounding boxes and their scores
+    - limit: the maximum number of boxes that will be selected
+    - threshold: used to decide whether boxes overlap too much
+
+  - Returns: the array indices of the selected bounding boxes
+*/
+public func nonMaxSuppression(predictions: [NMSPrediction], limit: Int, threshold: Float) -> [Int] {
+
+  // Sort the boxes based on their confidence scores, from high to low.
+  let sortedIndices = predictions.indices.sorted { predictions[$0].score > predictions[$1].score }
+
+  var selected: [Int] = []
+
+  // Loop through the bounding boxes, from highest score to lowest score,
+  // and determine whether or not to keep each box.
+  for i in 0..<predictions.count {
+    if selected.count >= limit { break }
+
+    var shouldSelect = true
+    let boxA = predictions[sortedIndices[i]]
+
+    // Does the current box overlap one of the selected boxes more than the
+    // given threshold amount? Then it's too similar, so don't keep it.
+    for j in 0..<selected.count {
+      let boxB = predictions[selected[j]]
+      if IOU(boxA.rect, boxB.rect) > threshold {
+        shouldSelect = false
+        break
+      }
+    }
+
+    // This bounding box did not overlap too much with any selected box, and
+    // therefore we'll keep it.
+    if shouldSelect {
+      selected.append(sortedIndices[i])
+    }
+  }
+
+  return selected
+}

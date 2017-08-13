@@ -21,9 +21,11 @@
 		7B4AFF9F1F408AE700AF62F3 /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A362D1F35F062009A6364 /* CVPixelBuffer+Helpers.swift */; };
 		7B4AFFA01F408AF700AF62F3 /* MultiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A36331F35F83E009A6364 /* MultiArray.swift */; };
 		7B4AFFA11F408AFD00AF62F3 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A36241F35E760009A6364 /* Array.swift */; };
-		7B4AFFA21F408B0100AF62F3 /* NonMaxSuppression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A362F1F35F10C009A6364 /* NonMaxSuppression.swift */; };
 		7B4AFFA31F408B0400AF62F3 /* Predictions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B43E9B11F361DBF0034B9BA /* Predictions.swift */; };
 		7B4AFFA51F408CD000AF62F3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4AFFA41F408CD000AF62F3 /* MenuViewController.swift */; };
+		7B4AFFA71F408E4500AF62F3 /* NMSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4AFFA61F408E4500AF62F3 /* NMSViewController.swift */; };
+		7B4AFFA91F408FAB00AF62F3 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4AFFA81F408FAB00AF62F3 /* BoundingBox.swift */; };
+		7B4AFFAA1F4095B200AF62F3 /* NonMaxSuppression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A362F1F35F10C009A6364 /* NonMaxSuppression.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +81,8 @@
 		7B4AFF8D1F40874000AF62F3 /* CoreMLHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreMLHelpers.h; sourceTree = "<group>"; };
 		7B4AFF8E1F40874000AF62F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B4AFFA41F408CD000AF62F3 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		7B4AFFA61F408E4500AF62F3 /* NMSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMSViewController.swift; sourceTree = "<group>"; };
+		7B4AFFA81F408FAB00AF62F3 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,8 +156,10 @@
 			isa = PBXGroup;
 			children = (
 				7B4A36101F35E6FA009A6364 /* AppDelegate.swift */,
+				7B4AFFA81F408FAB00AF62F3 /* BoundingBox.swift */,
 				7B4A36121F35E6FA009A6364 /* ImageViewController.swift */,
 				7B4AFFA41F408CD000AF62F3 /* MenuViewController.swift */,
+				7B4AFFA61F408E4500AF62F3 /* NMSViewController.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -326,9 +332,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B4AFFA91F408FAB00AF62F3 /* BoundingBox.swift in Sources */,
 				7B4A36131F35E6FA009A6364 /* ImageViewController.swift in Sources */,
 				7B4AFFA51F408CD000AF62F3 /* MenuViewController.swift in Sources */,
 				7B4A36111F35E6FA009A6364 /* AppDelegate.swift in Sources */,
+				7B4AFFA71F408E4500AF62F3 /* NMSViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,8 +355,8 @@
 				7B4AFF9E1F408A1400AF62F3 /* UIImage+CVPixelBuffer.swift in Sources */,
 				7B4AFFA11F408AFD00AF62F3 /* Array.swift in Sources */,
 				7B4AFFA01F408AF700AF62F3 /* MultiArray.swift in Sources */,
-				7B4AFFA21F408B0100AF62F3 /* NonMaxSuppression.swift in Sources */,
 				7B4AFFA31F408B0400AF62F3 /* Predictions.swift in Sources */,
+				7B4AFFAA1F4095B200AF62F3 /* NonMaxSuppression.swift in Sources */,
 				7B4AFF9F1F408AE700AF62F3 /* CVPixelBuffer+Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
