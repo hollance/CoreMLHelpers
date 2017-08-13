@@ -3,9 +3,10 @@ import Vision
 import CoreML
 import CoreMLHelpers
 
-class ViewController: UIViewController {
+class ImageViewController: UIViewController {
 
   @IBOutlet weak var imageView: UIImageView!
+  var rgb = true
 
   let ciContext = CIContext()
   var resizedPixelBuffer: CVPixelBuffer?
@@ -13,13 +14,11 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    testImagePixelBufferConversion()
-    testImagePixelBufferConversionGray()
-  }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+    if rgb {
+      testImagePixelBufferConversion()
+    } else {
+      testImagePixelBufferConversionGray()
+    }
   }
 
   func testImagePixelBufferConversion() {
