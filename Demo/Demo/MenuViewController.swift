@@ -17,6 +17,10 @@ class MenuViewController: UITableViewController {
       (segue.destination as! ImageViewController).rgb = true
     case "ShowGrayscale":
       (segue.destination as! ImageViewController).rgb = false
+    case "NMS":
+      (segue.destination as! NMSViewController).multiClass = false
+    case "NMSMulti":
+      (segue.destination as! NMSViewController).multiClass = true
     default:
       break
     }
