@@ -120,18 +120,23 @@ extension UIImage {
   /**
     Creates a new UIImage from an array of RGBA bytes.
    */
-  @nonobjc public class func fromByteArray(_ bytes: UnsafeMutableRawPointer,
+  @nonobjc public class func fromByteArray(_ bytes: [UInt8],
                                            width: Int,
                                            height: Int,
                                            scale: CGFloat = 0) -> UIImage? {
-    if let context = CGContext(data: bytes, width: width, height: height,
-                               bitsPerComponent: 8, bytesPerRow: width * 4,
-                               space: CGColorSpaceCreateDeviceRGB(),
-                               bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue),
-       let cgImage = context.makeImage() {
-      return UIImage(cgImage: cgImage, scale: scale, orientation: .up)
-    } else {
-      return nil
+    var image: UIImage?
+    bytes.withUnsafeBytes { ptr in
+      if let context = CGContext(data: UnsafeMutableRawPointer(mutating: ptr.baseAddress!),
+                                 width: width,
+                                 height: height,
+                                 bitsPerComponent: 8,
+                                 bytesPerRow: width * 4,
+                                 space: CGColorSpaceCreateDeviceRGB(),
+                                 bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue),
+         let cgImage = context.makeImage() {
+        image = UIImage(cgImage: cgImage, scale: scale, orientation: .up)
+      }
     }
+    return image
   }
 }

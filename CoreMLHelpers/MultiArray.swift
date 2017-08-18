@@ -216,14 +216,10 @@ extension MultiArray {
    Converts the multi-array to a color UIImage.
   */
   public func image(offset: T, scale: T) -> UIImage? {
-    var image: UIImage?
     if let (bytes, width, height) = toRawBytes(offset: offset, scale: scale) {
-      var bytes = bytes
-      bytes.withUnsafeMutableBytes { ptr in
-        image = UIImage.fromByteArray(ptr.baseAddress!, width: width, height: height)
-      }
+      return UIImage.fromByteArray(bytes, width: width, height: height)
     }
-    return image
+    return nil
   }
 
   /**
