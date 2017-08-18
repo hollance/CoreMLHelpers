@@ -56,20 +56,8 @@ extension MLMultiArray {
       var bytes = result.0
       let width = result.1
       let height = result.2
-
-      // Convert the raw data to a UIImage. Could also convert to CVPixelBuffer
-      // or any other format here.
       bytes.withUnsafeMutableBytes { ptr in
-        if let context = CGContext(data: ptr.baseAddress!,
-                                   width: width,
-                                   height: height,
-                                   bitsPerComponent: 8,
-                                   bytesPerRow: width * 4,
-                                   space: CGColorSpaceCreateDeviceRGB(),
-                                   bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue),
-           let cgImage = context.makeImage() {
-          image = UIImage(cgImage: cgImage, scale: 0, orientation: .up)
-        }
+        image = UIImage.fromByteArray(ptr.baseAddress!, width: width, height: height)
       }
     }
     return image
