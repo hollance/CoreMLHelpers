@@ -83,11 +83,11 @@ class MenuViewController: UITableViewController {
 
       // Use CoreMLHelpers' MultiArray. The advantage of this method is that
       // you can use reshaped() and/or transposed() if necessary.
-      let myArray = MultiArray<Double>(coreMLArray)
-      return myArray.image(offset: 0, scale: 255)
+      //let myArray = MultiArray<Double>(coreMLArray)
+      //return myArray.image(offset: 0, scale: 255)
 
       // Directly use the MLMultiArray:
-      //return coreMLArray.image(offset: 0, scale: 255)
+      return coreMLArray.image(offset: 0, scale: 255)
     }
     return nil
   }
