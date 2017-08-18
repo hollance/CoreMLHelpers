@@ -76,11 +76,18 @@ class MenuViewController: UITableViewController {
     let url = Bundle.main.url(forResource: "cat", withExtension: "bin")!
     let data = try! Data(contentsOf: url)
     let ptr = UnsafeMutableRawPointer(mutating: (data as NSData).bytes)
-    if let multiArray = try? MLMultiArray(dataPointer: ptr,
-                                          shape: [3, 360, 480],
-                                          dataType: .double,
-                                          strides: [NSNumber(value: 360*480), 480, 1]) {
-      return multiArray.image(offset: 0, scale: 255)
+    if let coreMLArray = try? MLMultiArray(dataPointer: ptr,
+                                           shape: [3, 360, 480],
+                                           dataType: .double,
+                                           strides: [NSNumber(value: 360*480), 480, 1]) {
+
+      // Use CoreMLHelpers' MultiArray. The advantage of this method is that
+      // you can use reshaped() and/or transposed() if necessary.
+      let myArray = MultiArray<Double>(coreMLArray)
+      return myArray.image(offset: 0, scale: 255)
+
+      // Directly use the MLMultiArray:
+      //return coreMLArray.image(offset: 0, scale: 255)
     }
     return nil
   }

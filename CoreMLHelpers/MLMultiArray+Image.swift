@@ -23,39 +23,14 @@
 import Foundation
 import CoreML
 
-public protocol MultiArrayArithmetic {
-  static func +(lhs: Self, rhs: Self) -> Self
-  static func *(lhs: Self, rhs: Self) -> Self
-  init(_: Int)
-  var toUInt8: UInt8 { get }
-}
-
-extension Double: MultiArrayArithmetic {
-  public var toUInt8: UInt8 { return UInt8(self) }
-}
-extension Float: MultiArrayArithmetic {
-  public var toUInt8: UInt8 { return UInt8(self) }
-}
-extension Int32: MultiArrayArithmetic {
-  public var toUInt8: UInt8 { return UInt8(self) }
-}
-
-private func clamp<T: Comparable>(_ x: T, min: T, max: T) -> T {
-  if x < min { return min }
-  if x > max { return max }
-  return x
-}
-
 extension MLMultiArray {
   /**
    Converts the multi-array to a color UIImage.
   */
-  public func image<T: MultiArrayArithmetic>(offset: T, scale: T) -> UIImage? where T: Comparable {
+  public func image<T: MultiArrayType>(offset: T, scale: T) -> UIImage? {
     var image: UIImage?
-    if let result = toRawBytes(offset: offset, scale: scale) {
-      var bytes = result.0
-      let width = result.1
-      let height = result.2
+    if let (bytes, width, height) = toRawBytes(offset: offset, scale: scale) {
+      var bytes = bytes
       bytes.withUnsafeMutableBytes { ptr in
         image = UIImage.fromByteArray(ptr.baseAddress!, width: width, height: height)
       }
@@ -79,8 +54,8 @@ extension MLMultiArray {
    - Note: The multi-array must have shape (3, height, width). Currently other
      arrangements aren't implemented yet.
   */
-  public func toRawBytes<T: MultiArrayArithmetic>(offset: T, scale: T)
-                        -> (bytes: [UInt8], width: Int, height: Int)? where T: Comparable {
+  public func toRawBytes<T: MultiArrayType>(offset: T, scale: T)
+                        -> (bytes: [UInt8], width: Int, height: Int)? {
     guard shape.count == 3 else {
       print("Expected a multi-array with 3 dimensions, got \(shape)")
       return nil
@@ -98,6 +73,8 @@ extension MLMultiArray {
     let heightStride = strides[1].intValue
     let widthStride = strides[2].intValue
     let pointer = UnsafeMutablePointer<T>(OpaquePointer(dataPointer))
+
+    // TODO: maybe use vImageConvert_Planar8toARGB8888 to speed this up
 
     for h in 0..<height {
       for w in 0..<width {

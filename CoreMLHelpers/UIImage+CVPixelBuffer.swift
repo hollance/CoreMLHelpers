@@ -124,7 +124,6 @@ extension UIImage {
                                            width: Int,
                                            height: Int,
                                            scale: CGFloat = 0) -> UIImage? {
-
     if let context = CGContext(data: bytes, width: width, height: height,
                                bitsPerComponent: 8, bytesPerRow: width * 4,
                                space: CGColorSpaceCreateDeviceRGB(),

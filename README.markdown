@@ -261,6 +261,16 @@ For example:
 - if the range is [-1, 1], use `offset: 1` and `scale: 127.5`
 - if the range is [0, 255], use `offset: 0` and `scale: 1`
 
+If your `MLMultiArray` does not have the shape **(3, height, width)** but for example something like `(1, 1, height, width, 3)` then you can use `MultiArray` instead:
+
+```swift
+let coreMLArray: MLMultiArray = ...
+let reshapedArray = MultiArray<Double>(coreMLArray).reshaped([height, width, 3])
+                                                   .transposed([2, 0, 1])
+let image = reshapedArray.image(offset: 0, scale: 255)
+```
+
+
 ## Predictions
 
 When using Vision you will receive the model's predictions as an array of `VNClassificationObservation` or `VNCoreMLFeatureValueObservation` objects.

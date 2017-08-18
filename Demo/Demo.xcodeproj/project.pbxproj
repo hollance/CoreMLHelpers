@@ -28,6 +28,7 @@
 		7B4AFFAA1F4095B200AF62F3 /* NonMaxSuppression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A362F1F35F10C009A6364 /* NonMaxSuppression.swift */; };
 		7B5603661F470A1D004635EE /* cat.bin in Resources */ = {isa = PBXBuildFile; fileRef = 7B5603651F470A1D004635EE /* cat.bin */; };
 		7B5603681F470C60004635EE /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5603671F470C60004635EE /* MLMultiArray+Image.swift */; };
+		7B56036C1F47659C004635EE /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B56036B1F47659C004635EE /* Math.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		7B4AFFA81F408FAB00AF62F3 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		7B5603651F470A1D004635EE /* cat.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = cat.bin; path = ../../Images/cat.bin; sourceTree = "<group>"; };
 		7B5603671F470C60004635EE /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MLMultiArray+Image.swift"; path = "../../CoreMLHelpers/MLMultiArray+Image.swift"; sourceTree = "<group>"; };
+		7B56036B1F47659C004635EE /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Math.swift; path = ../../CoreMLHelpers/Math.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 				7B4AFF8D1F40874000AF62F3 /* CoreMLHelpers.h */,
 				7B4A362D1F35F062009A6364 /* CVPixelBuffer+Helpers.swift */,
 				7B4AFF8E1F40874000AF62F3 /* Info.plist */,
+				7B56036B1F47659C004635EE /* Math.swift */,
 				7B5603671F470C60004635EE /* MLMultiArray+Image.swift */,
 				7B4A36331F35F83E009A6364 /* MultiArray.swift */,
 				7B4A362F1F35F10C009A6364 /* NonMaxSuppression.swift */,
@@ -366,6 +369,7 @@
 				7B4AFFA31F408B0400AF62F3 /* Predictions.swift in Sources */,
 				7B4AFFAA1F4095B200AF62F3 /* NonMaxSuppression.swift in Sources */,
 				7B4AFF9F1F408AE700AF62F3 /* CVPixelBuffer+Helpers.swift in Sources */,
+				7B56036C1F47659C004635EE /* Math.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
