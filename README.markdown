@@ -5,6 +5,7 @@ This is a collection of types and functions that make it a little easier to work
 Some of the things CoreMLHelpers has to offer:
 
 - convert images to `CVPixelBuffer` objects and back
+- `MLMultiArray` to image conversion
 - a more Swift-friendly version of `MLMultiArray`
 - handy Array functions to get top-5 predictions, argmax, and so on
 - non-maximum suppression for bounding boxes
@@ -241,6 +242,25 @@ This works because 900 × 50 = 3 × 100 × 150, so the number of elements remain
 
 > **NOTE:** `MultiArray` is still in early stages of development. Over time I want to add more functionality, like you'd find in numpy. Let me know if there is anything in particular you'd like to see added to `MultiArray`.
 
+## MLMultiArray to image conversion
+
+If the Core ML model outputs an `MLMultiArray` that is really an image, it's easy to convert it into a `UIImage`:
+
+```swift
+let multiArray: MLMultiArray = ...
+let image: UIImage = multiArray.image(offset: 0, scale: 255)
+```
+
+The multi-array must have the shape **(3, height, width)**. Any other shapes are not supported at the moment.
+
+The `offset` and `scale` parameters are used to put the values from the multi-array into the range [0, 255]. The offset is added first, then the result is multiplied by the scale.
+
+For example:
+
+- if the range of the data is [0, 1), use `offset: 0` and `scale: 255`
+- if the range is [-1, 1], use `offset: 1` and `scale: 127.5`
+- if the range is [0, 255], use `offset: 0` and `scale: 1`
+
 ## Predictions
 
 When using Vision you will receive the model's predictions as an array of `VNClassificationObservation` or `VNCoreMLFeatureValueObservation` objects.
@@ -329,7 +349,6 @@ New `Array` functions:
 - proper unit tests
 - add more numpy-like functionality to `MultiArray`
 - machine learning math functions such as softmax
-- `MLMultiArray` to image conversion
 
 ## License
 
