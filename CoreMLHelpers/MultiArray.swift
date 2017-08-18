@@ -110,6 +110,11 @@ public struct MultiArray<T: MultiArrayType> {
     set { pointer[a*strides[0] + b*strides[1] + c*strides[2] + d*strides[3]] = newValue }
   }
 
+  public subscript(a: Int, b: Int, c: Int, d: Int, e: Int) -> T {
+    get { return pointer[a*strides[0] + b*strides[1] + c*strides[2] + d*strides[3] + e*strides[4]] }
+    set { pointer[a*strides[0] + b*strides[1] + c*strides[2] + d*strides[3] + e*strides[4]] = newValue }
+  }
+
   public subscript(indices: [Int]) -> T {
     get { return pointer[offset(for: indices)] }
     set { pointer[offset(for: indices)] = newValue }
