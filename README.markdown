@@ -269,6 +269,8 @@ where `classLabelProbs` is the name of the model's output with the dictionary (t
 
 For [object detection models](https://github.com/hollance/YOLO-CoreML-MPSNNGraph), you'll often end up with many bounding box predictions (hundreds or thousands) but not all of these are useful. *Non-maximum suppression* is used to only keep the best bounding boxes.
 
+![NMS](Images/NMS.png)
+
 Each bounding box prediction consists of a rectangle, the predicted class for the object inside the rectangle, and a confidence score.
 
 ```swift
