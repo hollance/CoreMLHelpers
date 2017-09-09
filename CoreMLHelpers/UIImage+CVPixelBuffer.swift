@@ -120,21 +120,52 @@ extension UIImage {
   /**
     Creates a new UIImage from an array of RGBA bytes.
    */
-  @nonobjc public class func fromByteArray(_ bytes: [UInt8],
-                                           width: Int,
-                                           height: Int,
-                                           scale: CGFloat = 0) -> UIImage? {
+  @nonobjc public class func fromByteArrayRGBA(_ bytes: [UInt8],
+                                               width: Int,
+                                               height: Int,
+                                               scale: CGFloat = 0,
+                                               orientation: UIImageOrientation = .up) -> UIImage? {
+    return fromByteArray(bytes, width: width, height: height,
+                         scale: scale, orientation: orientation,
+                         bytesPerRow: width * 4,
+                         colorSpace: CGColorSpaceCreateDeviceRGB(),
+                         alphaInfo: .premultipliedLast)
+  }
+
+  /**
+    Creates a new UIImage from an array of grayscale bytes.
+   */
+  @nonobjc public class func fromByteArrayGray(_ bytes: [UInt8],
+                                               width: Int,
+                                               height: Int,
+                                               scale: CGFloat = 0,
+                                               orientation: UIImageOrientation = .up) -> UIImage? {
+    return fromByteArray(bytes, width: width, height: height,
+                         scale: scale, orientation: orientation,
+                         bytesPerRow: width,
+                         colorSpace: CGColorSpaceCreateDeviceGray(),
+                         alphaInfo: .none)
+  }
+
+  @nonobjc class func fromByteArray(_ bytes: [UInt8],
+                                    width: Int,
+                                    height: Int,
+                                    scale: CGFloat,
+                                    orientation: UIImageOrientation,
+                                    bytesPerRow: Int,
+                                    colorSpace: CGColorSpace,
+                                    alphaInfo: CGImageAlphaInfo) -> UIImage? {
     var image: UIImage?
     bytes.withUnsafeBytes { ptr in
       if let context = CGContext(data: UnsafeMutableRawPointer(mutating: ptr.baseAddress!),
                                  width: width,
                                  height: height,
                                  bitsPerComponent: 8,
-                                 bytesPerRow: width * 4,
-                                 space: CGColorSpaceCreateDeviceRGB(),
-                                 bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue),
+                                 bytesPerRow: bytesPerRow,
+                                 space: colorSpace,
+                                 bitmapInfo: alphaInfo.rawValue),
          let cgImage = context.makeImage() {
-        image = UIImage(cgImage: cgImage, scale: scale, orientation: .up)
+        image = UIImage(cgImage: cgImage, scale: scale, orientation: orientation)
       }
     }
     return image

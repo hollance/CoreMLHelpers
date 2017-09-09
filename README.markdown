@@ -251,17 +251,9 @@ let multiArray: MLMultiArray = ...
 let image: UIImage = multiArray.image(offset: 0, scale: 255)
 ```
 
-The multi-array must have the shape **(3, height, width)**. Any other shapes are not supported at the moment.
+The multi-array must have the shape **(3, height, width)** for color images, or **(height, width)** for grayscale images. Any other shapes are not supported at the moment.
 
-The `offset` and `scale` parameters are used to put the values from the multi-array into the range [0, 255]. The offset is added first, then the result is multiplied by the scale.
-
-For example:
-
-- if the range of the data is [0, 1), use `offset: 0` and `scale: 255`
-- if the range is [-1, 1], use `offset: 1` and `scale: 127.5`
-- if the range is [0, 255], use `offset: 0` and `scale: 1`
-
-If your `MLMultiArray` does not have the shape **(3, height, width)** but for example something like `(1, 1, height, width, 3)` then you can use `MultiArray` instead:
+If your `MLMultiArray` does not have the shape **(3, height, width)** or **(height, width)** but for example something like `(1, 1, height, width, 3)` then you can use `MultiArray` instead to reshape and transpose the array:
 
 ```swift
 let coreMLArray: MLMultiArray = ...
@@ -270,6 +262,13 @@ let reshapedArray = MultiArray<Double>(coreMLArray).reshaped([height, width, 3])
 let image = reshapedArray.image(offset: 0, scale: 255)
 ```
 
+The `offset` and `scale` parameters are used to put the values from the multi-array into the range [0, 255]. The offset is added first, then the result is multiplied by the scale.
+
+For example:
+
+- if the range of the data is [0, 1), use `offset: 0` and `scale: 255`
+- if the range is [-1, 1], use `offset: 1` and `scale: 127.5`
+- if the range is [0, 255], use `offset: 0` and `scale: 1`
 
 ## Predictions
 

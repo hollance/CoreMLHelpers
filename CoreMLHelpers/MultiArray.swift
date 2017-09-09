@@ -213,17 +213,7 @@ extension MultiArray: CustomStringConvertible {
 
 extension MultiArray {
   /**
-   Converts the multi-array to a color UIImage.
-  */
-  public func image(offset: T, scale: T) -> UIImage? {
-    if let (bytes, width, height) = toRawBytes(offset: offset, scale: scale) {
-      return UIImage.fromByteArray(bytes, width: width, height: height)
-    }
-    return nil
-  }
-
-  /**
-   Converts the multi-array into an array of RGBA pixels.
+   Converts the multi-array to a UIImage.
 
    Use the `offset` and `scale` parameters to put the values from the array in
    the range [0, 255]. The offset is added first, then the result is multiplied
@@ -231,12 +221,25 @@ extension MultiArray {
 
    For example: if the range of the data is [0, 1), use `offset: 0` and
    `scale: 255`. If the range is [-1, 1], use `offset: 1` and `scale: 127.5`.
+  */
+  public func image(offset: T, scale: T) -> UIImage? {
+    if shape.count == 3, let (b, w, h) = toRawBytesRGBA(offset: offset, scale: scale) {
+      return UIImage.fromByteArrayRGBA(b, width: w, height: h)
+    } else if shape.count == 2, let (b, w, h) = toRawBytesGray(offset: offset, scale: scale) {
+        return UIImage.fromByteArrayGray(b, width: w, height: h)
+    } else {
+      return nil
+    }
+  }
+
+  /**
+   Converts the multi-array into an array of RGBA pixels.
 
    - Note: The multi-array must have shape (3, height, width). If your array
      has a different shape, use `reshape()` or `transpose()` first.
   */
-  public func toRawBytes(offset: T, scale: T)
-                        -> (bytes: [UInt8], width: Int, height: Int)? {
+  public func toRawBytesRGBA(offset: T, scale: T)
+                            -> (bytes: [UInt8], width: Int, height: Int)? {
     guard shape.count == 3 else {
       print("Expected a multi-array with 3 dimensions, got \(shape)")
       return nil
@@ -261,6 +264,33 @@ extension MultiArray {
         bytes[offset + 1] = clamp(g, min: T(0), max: T(255)).toUInt8
         bytes[offset + 2] = clamp(b, min: T(0), max: T(255)).toUInt8
         bytes[offset + 3] = 255
+      }
+    }
+    return (bytes, width, height)
+  }
+
+  /**
+   Converts the multi-array into an array of grayscale pixels.
+
+   - Note: The multi-array must have shape (height, width). If your array
+     has a different shape, use `reshape()` or `transpose()` first.
+  */
+  public func toRawBytesGray(offset: T, scale: T)
+                            -> (bytes: [UInt8], width: Int, height: Int)? {
+    guard shape.count == 2 else {
+      print("Expected a multi-array with 2 dimensions, got \(shape)")
+      return nil
+    }
+
+    let height = shape[0]
+    let width = shape[1]
+    var bytes = [UInt8](repeating: 0, count: height * width)
+
+    for h in 0..<height {
+      for w in 0..<width {
+        let pixel = (self[h, w] + offset) * scale
+        let offset = h*width + w
+        bytes[offset] = clamp(pixel, min: T(0), max: T(255)).toUInt8
       }
     }
     return (bytes, width, height)

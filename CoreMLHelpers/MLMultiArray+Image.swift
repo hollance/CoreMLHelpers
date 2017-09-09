@@ -25,7 +25,7 @@ import CoreML
 
 extension MLMultiArray {
   /**
-   Converts the multi-array to a color UIImage.
+   Converts the multi-array to a UIImage.
   */
   public func image<T: MultiArrayType>(offset: T, scale: T) -> UIImage? {
     return MultiArray<T>(self).image(offset: offset, scale: scale)

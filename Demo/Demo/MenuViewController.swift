@@ -11,6 +11,8 @@ class MenuViewController: UITableViewController {
       (segue.destination as! ImageViewController).image = pixelBuffer2Grayscale()
     case "MultiArray2RGB":
       (segue.destination as! ImageViewController).image = multiArray2RGB()
+    case "MultiArray2Grayscale":
+      (segue.destination as! ImageViewController).image = multiArray2Grayscale()
     case "NMS":
       (segue.destination as! NMSViewController).multiClass = false
     case "NMSMulti":
@@ -70,17 +72,20 @@ class MenuViewController: UITableViewController {
 
   // MARK: - Test MLMultiArray to RGB image
 
-  func multiArray2RGB() -> UIImage? {
+  func loadCat() -> MLMultiArray? {
     // cat.bin contains cat.jpg saved as doubles in the range [0,1) with shape
     // (3, 360, 480). Load this binary data into a new MLMultiArray object.
     let url = Bundle.main.url(forResource: "cat", withExtension: "bin")!
     let data = try! Data(contentsOf: url)
     let ptr = UnsafeMutableRawPointer(mutating: (data as NSData).bytes)
-    if let coreMLArray = try? MLMultiArray(dataPointer: ptr,
-                                           shape: [3, 360, 480],
-                                           dataType: .double,
-                                           strides: [NSNumber(value: 360*480), 480, 1]) {
+    return try? MLMultiArray(dataPointer: ptr,
+                             shape: [3, 360, 480],
+                             dataType: .double,
+                             strides: [NSNumber(value: 360*480), 480, 1])
+  }
 
+  func multiArray2RGB() -> UIImage? {
+    if let coreMLArray = loadCat() {
       // Use CoreMLHelpers' MultiArray. The advantage of this method is that
       // you can use reshaped() and/or transposed() if necessary.
       //let myArray = MultiArray<Double>(coreMLArray)
@@ -88,6 +93,18 @@ class MenuViewController: UITableViewController {
 
       // Directly use the MLMultiArray:
       return coreMLArray.image(offset: 0, scale: 255)
+    }
+    return nil
+  }
+
+  func multiArray2Grayscale() -> UIImage? {
+    if let coreMLArray = loadCat() {
+      // Just for testing purposes, re-interpret the cat image (which is RGB)
+      // as grayscale. This creates an image that is 3 times as tall, with the
+      // red channel on top of the green channel, on top of the blue channel.
+
+      return MultiArray<Double>(coreMLArray).reshaped([3*360, 480])
+                                            .image(offset: 0, scale: 255)
     }
     return nil
   }
