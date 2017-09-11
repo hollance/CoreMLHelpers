@@ -102,9 +102,11 @@ class MenuViewController: UITableViewController {
       // Just for testing purposes, re-interpret the cat image (which is RGB)
       // as grayscale. This creates an image that is 3 times as tall, with the
       // red channel on top of the green channel, on top of the blue channel.
+      //return MultiArray<Double>(coreMLArray).reshaped([3*360, 480])
+      //                                      .image(offset: 0, scale: 255)
 
-      return MultiArray<Double>(coreMLArray).reshaped([3*360, 480])
-                                            .image(offset: 0, scale: 255)
+      // Only show the blue channel:
+      return MultiArray<Double>(coreMLArray).image(channel: 2, offset: 0, scale: 255)
     }
     return nil
   }
