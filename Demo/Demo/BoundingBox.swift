@@ -16,7 +16,7 @@ class BoundingBox {
     textLayer.contentsScale = UIScreen.main.scale
     textLayer.fontSize = 14
     textLayer.font = UIFont(name: "Avenir", size: textLayer.fontSize)
-    textLayer.alignmentMode = kCAAlignmentCenter
+    textLayer.alignmentMode = CATextLayerAlignmentMode.center
   }
 
   func addToLayer(_ parent: CALayer) {
@@ -38,7 +38,7 @@ class BoundingBox {
     textLayer.isHidden = false
 
     let attributes = [
-      NSAttributedStringKey.font: textLayer.font as Any
+      NSAttributedString.Key.font: textLayer.font as Any
     ]
 
     let textRect = label.boundingRect(with: CGSize(width: 400, height: 100),
