@@ -30,11 +30,9 @@ extension Array where Element: Comparable {
     precondition(self.count > 0)
     var maxIndex = 0
     var maxValue = self[0]
-    for i in 1..<self.count {
-      if self[i] > maxValue {
-        maxValue = self[i]
-        maxIndex = i
-      }
+    for i in 1..<self.count where self[i] > maxValue {
+      maxValue = self[i]
+      maxIndex = i
     }
     return (maxIndex, maxValue)
   }
