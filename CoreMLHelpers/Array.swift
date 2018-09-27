@@ -30,11 +30,9 @@ extension Array where Element: Comparable {
     precondition(self.count > 0)
     var maxIndex = 0
     var maxValue = self[0]
-    for i in 1..<self.count {
-      if self[i] > maxValue {
-        maxValue = self[i]
-        maxIndex = i
-      }
+    for i in 1..<self.count where self[i] > maxValue {
+      maxValue = self[i]
+      maxIndex = i
     }
     return (maxIndex, maxValue)
   }
@@ -50,8 +48,6 @@ extension Array where Element: Comparable {
     Returns a new array containing the elements at the specified indices.
   */
   public func gather(indices: [Array.Index]) -> [Element] {
-    var a = [Element]()
-    for i in indices { a.append(self[i]) }
-    return a
+    return indices.map { self[$0] }
   }
 }
