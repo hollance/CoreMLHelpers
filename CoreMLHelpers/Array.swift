@@ -50,8 +50,6 @@ extension Array where Element: Comparable {
     Returns a new array containing the elements at the specified indices.
   */
   public func gather(indices: [Array.Index]) -> [Element] {
-    var a = [Element]()
-    for i in indices { a.append(self[i]) }
-    return a
+    return indices.map { self[$0] }
   }
 }
