@@ -23,7 +23,6 @@
 #if canImport(UIKit)
 
 import UIKit
-import VideoToolbox
 
 extension UIImage {
   /**
@@ -93,10 +92,7 @@ extension UIImage {
    NOTE: This only works for RGB pixel buffers, not for grayscale.
   */
   public convenience init?(pixelBuffer: CVPixelBuffer) {
-    var cgImage: CGImage?
-    VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &cgImage)
-
-    if let cgImage = cgImage {
+    if let cgImage = CGImage.create(pixelBuffer: pixelBuffer) {
       self.init(cgImage: cgImage)
     } else {
       return nil
@@ -107,10 +103,7 @@ extension UIImage {
    Creates a new UIImage from a CVPixelBuffer, using Core Image.
   */
   public convenience init?(pixelBuffer: CVPixelBuffer, context: CIContext) {
-    let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
-    let rect = CGRect(x: 0, y: 0, width: CVPixelBufferGetWidth(pixelBuffer),
-                                  height: CVPixelBufferGetHeight(pixelBuffer))
-    if let cgImage = context.createCGImage(ciImage, from: rect) {
+    if let cgImage = CGImage.create(pixelBuffer: pixelBuffer, context: context) {
       self.init(cgImage: cgImage)
     } else {
       return nil
@@ -157,20 +150,10 @@ extension UIImage {
                                     bytesPerRow: Int,
                                     colorSpace: CGColorSpace,
                                     alphaInfo: CGImageAlphaInfo) -> UIImage? {
-    var image: UIImage?
-    bytes.withUnsafeBytes { ptr in
-      if let context = CGContext(data: UnsafeMutableRawPointer(mutating: ptr.baseAddress!),
-                                 width: width,
-                                 height: height,
-                                 bitsPerComponent: 8,
-                                 bytesPerRow: bytesPerRow,
-                                 space: colorSpace,
-                                 bitmapInfo: alphaInfo.rawValue),
-         let cgImage = context.makeImage() {
-        image = UIImage(cgImage: cgImage, scale: scale, orientation: orientation)
-      }
-    }
-    return image
+    
+    let cgImage = CGImage.fromByteArray(bytes, width: width, height: height, bytesPerRow: bytesPerRow, colorSpace: colorSpace, alphaInfo: alphaInfo)
+    
+    return cgImage.map { UIImage(cgImage: $0, scale: scale, orientation: orientation) }
   }
 }
 

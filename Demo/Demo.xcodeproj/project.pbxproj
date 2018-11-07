@@ -29,6 +29,7 @@
 		7B5603661F470A1D004635EE /* cat.bin in Resources */ = {isa = PBXBuildFile; fileRef = 7B5603651F470A1D004635EE /* cat.bin */; };
 		7B5603681F470C60004635EE /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5603671F470C60004635EE /* MLMultiArray+Image.swift */; };
 		7B56036C1F47659C004635EE /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B56036B1F47659C004635EE /* Math.swift */; };
+		A73345A92192728A00C159E4 /* CGImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73345A82192728A00C159E4 /* CGImage+CVPixelBuffer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		7B5603651F470A1D004635EE /* cat.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = cat.bin; path = ../../Images/cat.bin; sourceTree = "<group>"; };
 		7B5603671F470C60004635EE /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MLMultiArray+Image.swift"; path = "../../CoreMLHelpers/MLMultiArray+Image.swift"; sourceTree = "<group>"; };
 		7B56036B1F47659C004635EE /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Math.swift; path = ../../CoreMLHelpers/Math.swift; sourceTree = "<group>"; };
+		A73345A82192728A00C159E4 /* CGImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGImage+CVPixelBuffer.swift"; path = "../../CoreMLHelpers/CGImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				7B4A36241F35E760009A6364 /* Array.swift */,
+				A73345A82192728A00C159E4 /* CGImage+CVPixelBuffer.swift */,
 				7B4AFF8D1F40874000AF62F3 /* CoreMLHelpers.h */,
 				7B4A362D1F35F062009A6364 /* CVPixelBuffer+Helpers.swift */,
 				7B4AFF8E1F40874000AF62F3 /* Info.plist */,
@@ -368,6 +371,7 @@
 				7B4AFF9E1F408A1400AF62F3 /* UIImage+CVPixelBuffer.swift in Sources */,
 				7B4AFFA11F408AFD00AF62F3 /* Array.swift in Sources */,
 				7B4AFFA01F408AF700AF62F3 /* MultiArray.swift in Sources */,
+				A73345A92192728A00C159E4 /* CGImage+CVPixelBuffer.swift in Sources */,
 				7B5603681F470C60004635EE /* MLMultiArray+Image.swift in Sources */,
 				7B4AFFA31F408B0400AF62F3 /* Predictions.swift in Sources */,
 				7B4AFFAA1F4095B200AF62F3 /* NonMaxSuppression.swift in Sources */,
