@@ -20,10 +20,20 @@
   IN THE SOFTWARE.
 */
 
-#if canImport(UIKit)
-
 import Foundation
 import CoreML
+
+extension MLMultiArray {
+    /**
+     Converts the multi-array to a CGImage.
+     */
+    public func cgImage<T: MultiArrayType>(offset: T, scale: T) -> CGImage? {
+        return MultiArray<T>(self).cgImage(offset: offset, scale: scale)
+    }
+}
+
+#if canImport(UIKit)
+
 import UIKit
 
 extension MLMultiArray {

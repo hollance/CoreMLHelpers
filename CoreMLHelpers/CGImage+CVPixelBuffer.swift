@@ -20,8 +20,6 @@
  IN THE SOFTWARE.
  */
 
-#if canImport(CoreGraphics)
-
 import CoreGraphics
 import CoreImage
 import VideoToolbox
@@ -150,5 +148,3 @@ extension CGImage {
         }
     }
 }
-
-#endif
