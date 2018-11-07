@@ -20,6 +20,8 @@
   IN THE SOFTWARE.
 */
 
+#if canImport(UIKit)
+
 import UIKit
 import VideoToolbox
 
@@ -171,3 +173,5 @@ extension UIImage {
     return image
   }
 }
+
+#endif

@@ -20,8 +20,11 @@
   IN THE SOFTWARE.
 */
 
+#if canImport(UIKit)
+
 import Foundation
 import CoreML
+import UIKit
 
 extension MLMultiArray {
   /**
@@ -31,3 +34,5 @@ extension MLMultiArray {
     return MultiArray<T>(self).image(offset: offset, scale: scale)
   }
 }
+
+#endif

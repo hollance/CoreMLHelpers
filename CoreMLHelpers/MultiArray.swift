@@ -20,9 +20,12 @@
   IN THE SOFTWARE.
 */
 
+#if canImport(UIKit)
+
 import Foundation
 import CoreML
 import Swift
+import UIKit
 
 public protocol MultiArrayType: Comparable {
   static var multiArrayDataType: MLMultiArrayDataType { get }
@@ -323,3 +326,5 @@ extension MultiArray {
     return a.image(offset: offset, scale: scale)
   }
 }
+
+#endif
