@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2017 M.I. Hollemans
+  Copyright (c) 2017-2018 M.I. Hollemans
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -22,8 +22,24 @@
 
 import Foundation
 import UIKit
-import CoreML
 import Accelerate
+
+public struct BoundingBox {
+  /** Index of the predicted class. */
+  public let classIndex: Int
+
+  /** Confidence score. */
+  public let score: Float
+
+  /** Normalized coordinates between 0 and 1. */
+  public let rect: CGRect
+
+  public init(classIndex: Int, score: Float, rect: CGRect) {
+    self.classIndex = classIndex
+    self.score = score
+    self.rect = rect
+  }
+}
 
 /**
   Computes intersection-over-union overlap between two bounding boxes.
@@ -44,15 +60,15 @@ public func IOU(_ a: CGRect, _ b: CGRect) -> Float {
   return Float(intersectionArea / (areaA + areaB - intersectionArea))
 }
 
-public typealias NMSPrediction = (classIndex: Int, score: Float, rect: CGRect)
-
 /**
   Removes bounding boxes that overlap too much with other boxes that have
   a higher score.
 */
-public func nonMaxSuppression(predictions: [NMSPrediction], iouThreshold: Float, maxBoxes: Int) -> [Int] {
-  return nonMaxSuppression(predictions: predictions,
-                           indices: Array(predictions.indices),
+public func nonMaxSuppression(boundingBoxes: [BoundingBox],
+                              iouThreshold: Float,
+                              maxBoxes: Int) -> [Int] {
+  return nonMaxSuppression(boundingBoxes: boundingBoxes,
+                           indices: Array(boundingBoxes.indices),
                            iouThreshold: iouThreshold,
                            maxBoxes: maxBoxes)
 }
@@ -69,20 +85,20 @@ public func nonMaxSuppression(predictions: [NMSPrediction], iouThreshold: Float,
     classes get selected.
 
   - Parameters:
-    - predictions: an array of bounding boxes and their scores
+    - boundingBoxes: an array of bounding boxes and their scores
     - indices: which predictions to look at
     - iouThreshold: used to decide whether boxes overlap too much
     - maxBoxes: the maximum number of boxes that will be selected
 
   - Returns: the array indices of the selected bounding boxes
 */
-public func nonMaxSuppression(predictions: [NMSPrediction],
+public func nonMaxSuppression(boundingBoxes: [BoundingBox],
                               indices: [Int],
                               iouThreshold: Float,
                               maxBoxes: Int) -> [Int] {
 
   // Sort the boxes based on their confidence scores, from high to low.
-  let sortedIndices = indices.sorted { predictions[$0].score > predictions[$1].score }
+  let sortedIndices = indices.sorted { boundingBoxes[$0].score > boundingBoxes[$1].score }
 
   var selected: [Int] = []
 
@@ -92,12 +108,12 @@ public func nonMaxSuppression(predictions: [NMSPrediction],
     if selected.count >= maxBoxes { break }
 
     var shouldSelect = true
-    let boxA = predictions[sortedIndices[i]]
+    let boxA = boundingBoxes[sortedIndices[i]]
 
     // Does the current box overlap one of the selected boxes more than the
     // given threshold amount? Then it's too similar, so don't keep it.
     for j in 0..<selected.count {
-      let boxB = predictions[selected[j]]
+      let boxB = boundingBoxes[selected[j]]
       if IOU(boxA.rect, boxB.rect) > iouThreshold {
         shouldSelect = false
         break
@@ -128,7 +144,7 @@ public func nonMaxSuppression(predictions: [NMSPrediction],
 
   - Parameters:
     - numClasses: the number of classes
-    - predictions: an array of bounding boxes and their scores
+    - boundingBoxes: an array of bounding boxes and their scores
     - scoreThreshold: used to only keep bounding boxes with a high enough score
     - iouThreshold: used to decide whether boxes overlap too much
     - maxPerClass: the maximum number of boxes that will be selected per class
@@ -137,7 +153,7 @@ public func nonMaxSuppression(predictions: [NMSPrediction],
   - Returns: the array indices of the selected bounding boxes
 */
 public func nonMaxSuppressionMultiClass(numClasses: Int,
-                                        predictions: [NMSPrediction],
+                                        boundingBoxes: [BoundingBox],
                                         scoreThreshold: Float,
                                         iouThreshold: Float,
                                         maxPerClass: Int,
@@ -149,8 +165,8 @@ public func nonMaxSuppressionMultiClass(numClasses: Int,
     var filteredBoxes = [Int]()
 
     // Look at every bounding box for this class.
-    for p in 0..<predictions.count {
-      let prediction = predictions[p]
+    for p in 0..<boundingBoxes.count {
+      let prediction = boundingBoxes[p]
       if prediction.classIndex == c {
 
         // Only keep the box if its score is over the threshold.
@@ -161,7 +177,7 @@ public func nonMaxSuppressionMultiClass(numClasses: Int,
     }
 
     // Only keep the best bounding boxes for this class.
-    let nmsBoxes = nonMaxSuppression(predictions: predictions,
+    let nmsBoxes = nonMaxSuppression(boundingBoxes: boundingBoxes,
                                      indices: filteredBoxes,
                                      iouThreshold: iouThreshold,
                                      maxBoxes: maxPerClass)
@@ -171,6 +187,6 @@ public func nonMaxSuppressionMultiClass(numClasses: Int,
   }
 
   // Sort all the surviving boxes by score and only keep the best ones.
-  let sortedBoxes = selectedBoxes.sorted { predictions[$0].score > predictions[$1].score }
+  let sortedBoxes = selectedBoxes.sorted { boundingBoxes[$0].score > boundingBoxes[$1].score }
   return Array(sortedBoxes.prefix(maxTotal))
 }

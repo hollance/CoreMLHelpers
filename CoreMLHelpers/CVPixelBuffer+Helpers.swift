@@ -33,7 +33,7 @@ public func createPixelBuffer(width: Int, height: Int) -> CVPixelBuffer? {
                                    kCVPixelFormatType_32BGRA, nil,
                                    &pixelBuffer)
   if status != kCVReturnSuccess {
-    print("Error: could not create resized pixel buffer", status)
+    print("Error: could not create pixel buffer", status)
     return nil
   }
   return pixelBuffer
@@ -128,7 +128,6 @@ public func resizePixelBuffer(_ pixelBuffer: CVPixelBuffer,
 /**
  Rotates CVPixelBuffer by the provided factor of 90 counterclock-wise.
  */
-
 public func rotate90PixelBuffer(_ srcPixelBuffer: CVPixelBuffer, factor: UInt8) -> CVPixelBuffer? {
     CVPixelBufferLockBaseAddress(srcPixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
     guard let srcData = CVPixelBufferGetBaseAddress(srcPixelBuffer) else {

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "CoreMLHelpers"
-  s.version      = "0.1.0"
+  s.version      = "0.2.0"
   s.summary      = "Types and functions that make it a little easier to work with Core ML in Swift."
   s.homepage     = "https://github.com/hollance/CoreMLHelpers"
   s.license      = { :type => "MIT", :file => "LICENSE.txt" }

@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class BoundingBox {
+class BoundingBoxView {
   let shapeLayer: CAShapeLayer
   let textLayer: CATextLayer
 

@@ -25,6 +25,9 @@ import Swift
 extension Array where Element: Comparable {
   /**
     Returns the index and value of the largest element in the array.
+
+    - Note: This method is slow. For faster results, use the standalone
+            version of argmax() instead.
   */
   public func argmax() -> (Int, Element) {
     precondition(self.count > 0)

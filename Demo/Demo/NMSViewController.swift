@@ -9,7 +9,7 @@ class NMSViewController: UIViewController {
   let scoreThreshold: Float = 0.1
   let iouThreshold: Float = 0.5
 
-  var boundingBoxes: [BoundingBox] = []
+  var boundingBoxViews: [BoundingBoxView] = []
   var multiClass = false
 
   override func viewDidLoad() {
@@ -17,9 +17,9 @@ class NMSViewController: UIViewController {
 
     // Create shape layers for the bounding boxes.
     for _ in 0..<numBoxes {
-      let box = BoundingBox()
+      let box = BoundingBoxView()
       box.addToLayer(view.layer)
-      boundingBoxes.append(box)
+      boundingBoxViews.append(box)
     }
   }
 
@@ -62,7 +62,7 @@ class NMSViewController: UIViewController {
     clusterYs.append(clusterY2)
 
     // Create random predictions around the clusters.
-    var predictions: [NMSPrediction] = []
+    var predictions: [BoundingBox] = []
     for _ in 0..<numBoxes {
       let classIndex = random(numClasses)
       let clusterX = clusterXs[classIndex]
@@ -74,15 +74,18 @@ class NMSViewController: UIViewController {
       let y2 = min(height, clusterY + random() * height/4)
 
       let rect = CGRect(x: x1, y: 44 + y1, width: x2 - x1, height: y2 - y1)
-      let score = Float(random())
-      predictions.append((classIndex, score, rect))
+
+      let boundingBox = BoundingBox(classIndex: classIndex,
+                                    score: Float(random()),
+                                    rect: rect)
+      predictions.append(boundingBox)
     }
 
     // Perform non-maximum suppression to find the best bounding boxes.
     let selected: [Int]
     if multiClass {
       selected = nonMaxSuppressionMultiClass(numClasses: numClasses,
-                                             predictions: predictions,
+                                             boundingBoxes: predictions,
                                              scoreThreshold: scoreThreshold,
                                              iouThreshold: iouThreshold,
                                              maxPerClass: selectPerClass,
@@ -91,7 +94,7 @@ class NMSViewController: UIViewController {
       // First remove bounding boxes whose score is too low.
       let filteredIndices = predictions.indices.filter { predictions[$0].score > scoreThreshold }
 
-      selected = nonMaxSuppression(predictions: predictions,
+      selected = nonMaxSuppression(boundingBoxes: predictions,
                                    indices: filteredIndices,
                                    iouThreshold: iouThreshold,
                                    maxBoxes: selectHowMany)
@@ -109,9 +112,9 @@ class NMSViewController: UIViewController {
         color = inactiveColors[prediction.classIndex]
         textColor = UIColor(white: 0, alpha: 0.2)
       }
-      boundingBoxes[i].show(frame: prediction.rect,
-                            label: String(format: "%.2f", prediction.score),
-                            color: color, textColor: textColor)
+      boundingBoxViews[i].show(frame: prediction.rect,
+                               label: String(format: "%.2f", prediction.score),
+                               color: color, textColor: textColor)
     }
   }
 

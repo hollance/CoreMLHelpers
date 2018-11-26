@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2017 M.I. Hollemans
+  Copyright (c) 2017-2018 M.I. Hollemans
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -88,12 +88,13 @@ extension UIImage {
 extension UIImage {
   /**
    Creates a new UIImage from a CVPixelBuffer.
-   NOTE: This only works for RGB pixel buffers, not for grayscale.
+
+   - Note: Not all CVPixelBuffer pixel formats support conversion into a
+           CGImage-compatible pixel format.
   */
   public convenience init?(pixelBuffer: CVPixelBuffer) {
     var cgImage: CGImage?
     VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &cgImage)
-
     if let cgImage = cgImage {
       self.init(cgImage: cgImage)
     } else {
@@ -101,8 +102,44 @@ extension UIImage {
     }
   }
 
+  // Alternative implementations:
+
+  /*
+  public convenience init?(pixelBuffer: CVPixelBuffer) {
+    // This converts the image to a CIImage first and then to a UIImage.
+    // Does not appear to work on the simulator but is OK on the device.
+    self.init(ciImage: CIImage(cvPixelBuffer: pixelBuffer))
+  }
+  */
+
+  /*
+  public convenience init?(pixelBuffer: CVPixelBuffer) {
+    // This method creates a bitmap CGContext using the pixel buffer's memory.
+    // It currently only handles kCVPixelFormatType_32ARGB images. To support
+    // other pixel formats too, you'll have to change the bitmapInfo and maybe
+    // the color space for the CGContext.
+
+    guard kCVReturnSuccess == CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly) else {
+      return nil
+    }
+    defer { CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly) }
+
+    guard let context = CGContext(data: CVPixelBufferGetBaseAddress(pixelBuffer),
+                                  width: CVPixelBufferGetWidth(pixelBuffer),
+                                  height: CVPixelBufferGetHeight(pixelBuffer),
+                                  bitsPerComponent: 8,
+                                  bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer),
+                                  space: CGColorSpaceCreateDeviceRGB(),
+                                  bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue),
+          let cgImage = context.makeImage() else {
+      return nil
+    }
+    self.init(cgImage: cgImage)
+  }
+  */
+
   /**
-   Creates a new UIImage from a CVPixelBuffer, using Core Image.
+   Creates a new UIImage from a CVPixelBuffer, using a Core Image context.
   */
   public convenience init?(pixelBuffer: CVPixelBuffer, context: CIContext) {
     let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
@@ -113,61 +150,5 @@ extension UIImage {
     } else {
       return nil
     }
-  }
-}
-
-extension UIImage {
-  /**
-    Creates a new UIImage from an array of RGBA bytes.
-   */
-  @nonobjc public class func fromByteArrayRGBA(_ bytes: [UInt8],
-                                               width: Int,
-                                               height: Int,
-                                               scale: CGFloat = 0,
-                                               orientation: UIImage.Orientation = .up) -> UIImage? {
-    return fromByteArray(bytes, width: width, height: height,
-                         scale: scale, orientation: orientation,
-                         bytesPerRow: width * 4,
-                         colorSpace: CGColorSpaceCreateDeviceRGB(),
-                         alphaInfo: .premultipliedLast)
-  }
-
-  /**
-    Creates a new UIImage from an array of grayscale bytes.
-   */
-  @nonobjc public class func fromByteArrayGray(_ bytes: [UInt8],
-                                               width: Int,
-                                               height: Int,
-                                               scale: CGFloat = 0,
-                                               orientation: UIImage.Orientation = .up) -> UIImage? {
-    return fromByteArray(bytes, width: width, height: height,
-                         scale: scale, orientation: orientation,
-                         bytesPerRow: width,
-                         colorSpace: CGColorSpaceCreateDeviceGray(),
-                         alphaInfo: .none)
-  }
-
-  @nonobjc class func fromByteArray(_ bytes: [UInt8],
-                                    width: Int,
-                                    height: Int,
-                                    scale: CGFloat,
-                                    orientation: UIImage.Orientation,
-                                    bytesPerRow: Int,
-                                    colorSpace: CGColorSpace,
-                                    alphaInfo: CGImageAlphaInfo) -> UIImage? {
-    var image: UIImage?
-    bytes.withUnsafeBytes { ptr in
-      if let context = CGContext(data: UnsafeMutableRawPointer(mutating: ptr.baseAddress!),
-                                 width: width,
-                                 height: height,
-                                 bitsPerComponent: 8,
-                                 bytesPerRow: bytesPerRow,
-                                 space: colorSpace,
-                                 bitmapInfo: alphaInfo.rawValue),
-         let cgImage = context.makeImage() {
-        image = UIImage(cgImage: cgImage, scale: scale, orientation: orientation)
-      }
-    }
-    return image
   }
 }
