@@ -21,7 +21,6 @@
 */
 
 import Foundation
-import UIKit
 import Accelerate
 
 public struct BoundingBox {

@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2017 M.I. Hollemans
+  Copyright (c) 2017-2018 M.I. Hollemans
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -20,87 +20,47 @@
   IN THE SOFTWARE.
 */
 
+#if canImport(UIKit)
+
 import UIKit
 
 extension UIImage {
   /**
     Converts the image into an array of RGBA bytes.
-   */
-  @nonobjc public func toByteArray() -> [UInt8] {
-    let width = Int(size.width)
-    let height = Int(size.height)
-    var bytes = [UInt8](repeating: 0, count: width * height * 4)
-
-    bytes.withUnsafeMutableBytes { ptr in
-      if let context = CGContext(
-                    data: ptr.baseAddress,
-                    width: width,
-                    height: height,
-                    bitsPerComponent: 8,
-                    bytesPerRow: width * 4,
-                    space: CGColorSpaceCreateDeviceRGB(),
-                    bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) {
-
-        if let image = self.cgImage {
-          let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-          context.draw(image, in: rect)
-        }
-      }
-    }
-    return bytes
+  */
+  @nonobjc public func toByteArrayRGBA() -> [UInt8]? {
+    return cgImage?.toByteArrayRGBA()
   }
 
   /**
     Creates a new UIImage from an array of RGBA bytes.
-   */
+  */
   @nonobjc public class func fromByteArrayRGBA(_ bytes: [UInt8],
                                                width: Int,
                                                height: Int,
                                                scale: CGFloat = 0,
                                                orientation: UIImage.Orientation = .up) -> UIImage? {
-    return fromByteArray(bytes, width: width, height: height,
-                         scale: scale, orientation: orientation,
-                         bytesPerRow: width * 4,
-                         colorSpace: CGColorSpaceCreateDeviceRGB(),
-                         alphaInfo: .premultipliedLast)
+    if let cgImage = CGImage.fromByteArrayRGBA(bytes, width: width, height: height) {
+      return UIImage(cgImage: cgImage, scale: scale, orientation: orientation)
+    } else {
+      return nil
+    }
   }
 
   /**
     Creates a new UIImage from an array of grayscale bytes.
-   */
+  */
   @nonobjc public class func fromByteArrayGray(_ bytes: [UInt8],
                                                width: Int,
                                                height: Int,
                                                scale: CGFloat = 0,
                                                orientation: UIImage.Orientation = .up) -> UIImage? {
-    return fromByteArray(bytes, width: width, height: height,
-                         scale: scale, orientation: orientation,
-                         bytesPerRow: width,
-                         colorSpace: CGColorSpaceCreateDeviceGray(),
-                         alphaInfo: .none)
-  }
-
-  @nonobjc class func fromByteArray(_ bytes: [UInt8],
-                                    width: Int,
-                                    height: Int,
-                                    scale: CGFloat,
-                                    orientation: UIImage.Orientation,
-                                    bytesPerRow: Int,
-                                    colorSpace: CGColorSpace,
-                                    alphaInfo: CGImageAlphaInfo) -> UIImage? {
-    var image: UIImage?
-    bytes.withUnsafeBytes { ptr in
-      if let context = CGContext(data: UnsafeMutableRawPointer(mutating: ptr.baseAddress!),
-                                 width: width,
-                                 height: height,
-                                 bitsPerComponent: 8,
-                                 bytesPerRow: bytesPerRow,
-                                 space: colorSpace,
-                                 bitmapInfo: alphaInfo.rawValue),
-         let cgImage = context.makeImage() {
-        image = UIImage(cgImage: cgImage, scale: scale, orientation: orientation)
-      }
+    if let cgImage = CGImage.fromByteArrayGray(bytes, width: width, height: height) {
+      return UIImage(cgImage: cgImage, scale: scale, orientation: orientation)
+    } else {
+      return nil
     }
-    return image
   }
 }
+
+#endif

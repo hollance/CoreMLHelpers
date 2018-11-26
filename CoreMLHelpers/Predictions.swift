@@ -23,8 +23,8 @@
 import Vision
 
 /**
- Returns the top `k` predictions from Core ML classification results as an
- array of `(String, Double)` pairs.
+  Returns the top `k` predictions from Core ML classification results as an
+  array of `(String, Double)` pairs.
 */
 public func top(_ k: Int, _ prob: [String: Double]) -> [(String, Double)] {
   return Array(prob.map { x in (x.key, x.value) }
@@ -33,8 +33,8 @@ public func top(_ k: Int, _ prob: [String: Double]) -> [(String, Double)] {
 }
 
 /**
- Returns the top `k` predictions from Vision classification results as an
- array of `(String, Double)` pairs.
+  Returns the top `k` predictions from Vision classification results as an
+  array of `(String, Double)` pairs.
 */
 public func top(_ k: Int, _ observations: [VNClassificationObservation]) -> [(String, Double)] {
   // The Vision observations are sorted by confidence already.

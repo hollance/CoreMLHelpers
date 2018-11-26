@@ -22,7 +22,6 @@
 
 import Accelerate
 import CoreML
-import UIKit
 
 public protocol MultiArrayType: Comparable {
   static var multiArrayDataType: MLMultiArrayDataType { get }
@@ -51,35 +50,35 @@ extension Int32: MultiArrayType {
 
 extension MLMultiArray {
   /**
-   Converts the multi-array to a UIImage.
+    Converts the multi-array to a CGImage.
 
-   The multi-array must have at least 2 dimensions for a grayscale image, or
-   at least 3 dimensions for a color image.
+    The multi-array must have at least 2 dimensions for a grayscale image, or
+    at least 3 dimensions for a color image.
 
-   The default expected shape is (height, width) or (channels, height, width).
-   However, you can change this using the `axes` parameter. For example, if the
-   array shape is (1, height, width, channels), use `axes: (3, 1, 2)`.
+    The default expected shape is (height, width) or (channels, height, width).
+    However, you can change this using the `axes` parameter. For example, if
+    the array shape is (1, height, width, channels), use `axes: (3, 1, 2)`.
 
-   If `channel` is not nil, only converts that channel to a grayscale image.
-   This lets you visualize individual channels from a multi-array with more
-   than 4 channels.
+    If `channel` is not nil, only converts that channel to a grayscale image.
+    This lets you visualize individual channels from a multi-array with more
+    than 4 channels.
 
-   Otherwise, converts all channels. In this case, the number of channels in
-   the multi-array must be 1 for grayscale, 3 for RGB, or 4 for RGBA.
+    Otherwise, converts all channels. In this case, the number of channels in
+    the multi-array must be 1 for grayscale, 3 for RGB, or 4 for RGBA.
 
-   Use the `min` and `max` parameters to put the values from the array into
-   the range [0, 255], if not already:
+    Use the `min` and `max` parameters to put the values from the array into
+    the range [0, 255], if not already:
 
-   - `min`: should be the smallest value in the data; this will be mapped to 0.
-   - `max`: should be the largest value in the data; will be mapped to 255.
+    - `min`: should be the smallest value in the data; this will be mapped to 0.
+    - `max`: should be the largest value in the data; will be mapped to 255.
 
-   For example, if the range of the data in the multi-array is [-1, 1], use
-   `min: -1, max: 1`. If the range is already [0, 255], then use the defaults.
+    For example, if the range of the data in the multi-array is [-1, 1], use
+    `min: -1, max: 1`. If the range is already [0, 255], then use the defaults.
   */
-  public func image(min: Double = 0,
-                    max: Double = 255,
-                    channel: Int? = nil,
-                    axes: (Int, Int, Int)? = nil) -> UIImage? {
+  public func cgImage(min: Double = 0,
+                      max: Double = 255,
+                      channel: Int? = nil,
+                      axes: (Int, Int, Int)? = nil) -> CGImage? {
     switch self.dataType {
     case .double:
       return _image(min: min, max: max, channel: channel, axes: axes)
@@ -97,28 +96,28 @@ extension MLMultiArray {
   private func _image<T: MultiArrayType>(min: T,
                                          max: T,
                                          channel: Int?,
-                                         axes: (Int, Int, Int)?) -> UIImage? {
+                                         axes: (Int, Int, Int)?) -> CGImage? {
     if let (b, w, h, c) = toRawBytes(min: min, max: max, channel: channel, axes: axes) {
       if c == 1 {
-        return UIImage.fromByteArrayGray(b, width: w, height: h)
+        return CGImage.fromByteArrayGray(b, width: w, height: h)
       } else {
-        return UIImage.fromByteArrayRGBA(b, width: w, height: h)
+        return CGImage.fromByteArrayRGBA(b, width: w, height: h)
       }
     }
     return nil
   }
 
   /**
-   Converts the multi-array into an array of RGBA or grayscale pixels.
+    Converts the multi-array into an array of RGBA or grayscale pixels.
 
-   - Note: This is not particularly fast, but it is flexible. You can change
-           the loops to convert the multi-array whichever way you please.
+    - Note: This is not particularly fast, but it is flexible. You can change
+            the loops to convert the multi-array whichever way you please.
 
-   - Note: The type of `min` and `max` must match the dataType of the
-           MLMultiArray object.
+    - Note: The type of `min` and `max` must match the dataType of the
+            MLMultiArray object.
 
-   - Returns: tuple containing the RGBA bytes, the dimensions of the image,
-              and the number of channels in the image (1, 3, or 4).
+    - Returns: tuple containing the RGBA bytes, the dimensions of the image,
+               and the number of channels in the image (1, 3, or 4).
   */
   public func toRawBytes<T: MultiArrayType>(min: T,
                                             max: T,
@@ -221,7 +220,7 @@ extension MLMultiArray {
 }
 
 /**
-  Fast conversion from MLMultiArray to UIImage using the vImage framework.
+  Fast conversion from MLMultiArray to CGImage using the vImage framework.
 
   - Parameters:
     - features: A multi-array with data type FLOAT32 and three dimensions
@@ -231,11 +230,11 @@ extension MLMultiArray {
     - max: The largest value in the multi-array. This and any larger values
            will be will be mapped to 255 in the output image.
 
-  - Returns: a new UIImage or nil if the conversion fails
+  - Returns: a new CGImage or nil if the conversion fails
 */
-public func createUIImage(fromFloatArray features: MLMultiArray,
+public func createCGImage(fromFloatArray features: MLMultiArray,
                           min: Float = 0,
-                          max: Float = 255) -> UIImage? {
+                          max: Float = 255) -> CGImage? {
   assert(features.dataType == .float32)
   assert(features.shape.count == 3)
 
@@ -276,8 +275,31 @@ public func createUIImage(fromFloatArray features: MLMultiArray,
                                               [min, min, min],
                                               vImage_Flags(0))
   if error == kvImageNoError {
-    return UIImage.fromByteArrayRGBA(pixels, width: width, height: height)
+    return CGImage.fromByteArrayRGBA(pixels, width: width, height: height)
   } else {
     return nil
   }
 }
+
+#if canImport(UIKit)
+
+import UIKit
+
+extension MLMultiArray {
+  public func image(min: Double = 0,
+                    max: Double = 255,
+                    channel: Int? = nil,
+                    axes: (Int, Int, Int)? = nil) -> UIImage? {
+    let cgImg = cgImage(min: min, max: max, channel: channel, axes: axes)
+    return cgImg.map { UIImage(cgImage: $0) }
+  }
+}
+
+public func createUIImage(fromFloatArray features: MLMultiArray,
+                          min: Float = 0,
+                          max: Float = 255) -> UIImage? {
+  let cgImg = createCGImage(fromFloatArray: features, min: min, max: max)
+  return cgImg.map { UIImage(cgImage: $0) }
+}
+
+#endif

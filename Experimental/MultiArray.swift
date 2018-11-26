@@ -190,26 +190,6 @@ extension MultiArray: CustomStringConvertible {
 
 extension MultiArray {
   /**
-   Converts the multi-array to a UIImage.
-
-   Use the `offset` and `scale` parameters to put the values from the array in
-   the range [0, 255]. The offset is added first, then the result is multiplied
-   by the scale.
-
-   For example: if the range of the data is [0, 1), use `offset: 0` and
-   `scale: 255`. If the range is [-1, 1], use `offset: 1` and `scale: 127.5`.
-  */
-  public func image(offset: T, scale: T) -> UIImage? {
-    if shape.count == 3, let (b, w, h) = toRawBytesRGBA(offset: offset, scale: scale) {
-      return UIImage.fromByteArrayRGBA(b, width: w, height: h)
-    } else if shape.count == 2, let (b, w, h) = toRawBytesGray(offset: offset, scale: scale) {
-      return UIImage.fromByteArrayGray(b, width: w, height: h)
-    } else {
-      return nil
-    }
-  }
-
-  /**
    Converts the multi-array into an array of RGBA pixels.
 
    - Note: The multi-array must have shape (3, height, width). If your array
@@ -272,14 +252,36 @@ extension MultiArray {
     }
     return (bytes, width, height)
   }
+}
+
+extension MultiArray {
+  /**
+   Converts the multi-array to a CGImage.
+
+   Use the `offset` and `scale` parameters to put the values from the array in
+   the range [0, 255]. The offset is added first, then the result is multiplied
+   by the scale.
+
+   For example: if the range of the data is [0, 1), use `offset: 0` and
+   `scale: 255`. If the range is [-1, 1], use `offset: 1` and `scale: 127.5`.
+  */
+  public func cgImage(offset: T, scale: T) -> CGImage? {
+    if shape.count == 3, let (b, w, h) = toRawBytesRGBA(offset: offset, scale: scale) {
+      return CGImage.fromByteArrayRGBA(b, width: w, height: h)
+    } else if shape.count == 2, let (b, w, h) = toRawBytesGray(offset: offset, scale: scale) {
+      return CGImage.fromByteArrayGray(b, width: w, height: h)
+    } else {
+      return nil
+    }
+  }
 
   /**
-   Converts a single channel from the multi-array to a grayscale UIImage.
+   Converts a single channel from the multi-array to a grayscale CGImage.
 
    - Note: The multi-array must have shape (channels, height, width). If your
      array has a different shape, use `reshape()` or `transpose()` first.
   */
-  public func image(channel: Int, offset: T, scale: T) -> UIImage? {
+  public func cgImage(channel: Int, offset: T, scale: T) -> CGImage? {
     guard shape.count == 3 else {
       print("Expected a multi-array with 3 dimensions, got \(shape)")
       return nil
@@ -297,6 +299,40 @@ extension MultiArray {
         a[y, x] = self[channel, y, x]
       }
     }
-    return a.image(offset: offset, scale: scale)
+    return a.cgImage(offset: offset, scale: scale)
   }
 }
+
+#if canImport(UIKit)
+
+import UIKit
+
+extension MultiArray {
+  /**
+    Converts the multi-array to a UIImage.
+
+    Use the `offset` and `scale` parameters to put the values from the array in
+    the range [0, 255]. The offset is added first, then the result is multiplied
+    by the scale.
+
+    For example: if the range of the data is [0, 1), use `offset: 0` and
+    `scale: 255`. If the range is [-1, 1], use `offset: 1` and `scale: 127.5`.
+   */
+  public func image(offset: T, scale: T) -> UIImage? {
+    let cgImg = cgImage(offset: offset, scale: scale)
+    return cgImg.map { UIImage(cgImage: $0) }
+  }
+
+  /**
+    Converts a single channel from the multi-array to a grayscale UIImage.
+
+    - Note: The multi-array must have shape (channels, height, width). If your
+            array has a different shape, use `reshape()` or `transpose()` first.
+   */
+  public func image(channel: Int, offset: T, scale: T) -> UIImage? {
+    let cgImg = cgImage(channel: channel, offset: offset, scale: scale)
+    return cgImg.map { UIImage(cgImage: $0) }
+  }
+}
+
+#endif

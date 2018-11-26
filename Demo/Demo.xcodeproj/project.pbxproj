@@ -33,6 +33,8 @@
 		7BD898C021A49D7300A37D3E /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898BF21A49D7300A37D3E /* UIImage+Extensions.swift */; };
 		7BD898CA21A4BAA400A37D3E /* MultiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898C221A4A95C00A37D3E /* MultiArray.swift */; };
 		7BD898CD21A5832800A37D3E /* MLMultiArray+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898CC21A5832800A37D3E /* MLMultiArray+Helpers.swift */; };
+		7BD898D321AC429900A37D3E /* CGImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898D221AC429900A37D3E /* CGImage+RawBytes.swift */; };
+		7BD898D521AC452D00A37D3E /* CGImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898D421AC452D00A37D3E /* CGImage+CVPixelBuffer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,8 @@
 		7BD898BF21A49D7300A37D3E /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Extensions.swift"; path = "../../CoreMLHelpers/UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		7BD898C221A4A95C00A37D3E /* MultiArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiArray.swift; sourceTree = "<group>"; };
 		7BD898CC21A5832800A37D3E /* MLMultiArray+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MLMultiArray+Helpers.swift"; path = "../../CoreMLHelpers/MLMultiArray+Helpers.swift"; sourceTree = "<group>"; };
+		7BD898D221AC429900A37D3E /* CGImage+RawBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGImage+RawBytes.swift"; path = "../../CoreMLHelpers/CGImage+RawBytes.swift"; sourceTree = "<group>"; };
+		7BD898D421AC452D00A37D3E /* CGImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGImage+CVPixelBuffer.swift"; path = "../../CoreMLHelpers/CGImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +198,8 @@
 				7B4AFF8D1F40874000AF62F3 /* CoreMLHelpers.h */,
 				7B4AFF8E1F40874000AF62F3 /* Info.plist */,
 				7B4A36241F35E760009A6364 /* Array+Extensions.swift */,
+				7BD898D421AC452D00A37D3E /* CGImage+CVPixelBuffer.swift */,
+				7BD898D221AC429900A37D3E /* CGImage+RawBytes.swift */,
 				7BD898A821A49BFF00A37D3E /* CGImagePropertyOrientation.swift */,
 				7B4A362D1F35F062009A6364 /* CVPixelBuffer+Helpers.swift */,
 				7B56036B1F47659C004635EE /* Math.swift */,
@@ -389,9 +395,11 @@
 				7B4AFF9E1F408A1400AF62F3 /* UIImage+CVPixelBuffer.swift in Sources */,
 				7B4AFFA11F408AFD00AF62F3 /* Array+Extensions.swift in Sources */,
 				7B5603681F470C60004635EE /* MLMultiArray+Image.swift in Sources */,
+				7BD898D321AC429900A37D3E /* CGImage+RawBytes.swift in Sources */,
 				7BD898C021A49D7300A37D3E /* UIImage+Extensions.swift in Sources */,
 				7BD898CA21A4BAA400A37D3E /* MultiArray.swift in Sources */,
 				7B4AFFA31F408B0400AF62F3 /* Predictions.swift in Sources */,
+				7BD898D521AC452D00A37D3E /* CGImage+CVPixelBuffer.swift in Sources */,
 				7B4AFFAA1F4095B200AF62F3 /* NonMaxSuppression.swift in Sources */,
 				7BD898A921A49BFF00A37D3E /* CGImagePropertyOrientation.swift in Sources */,
 				7BD898A721A47FEB00A37D3E /* UIImage+RawBytes.swift in Sources */,

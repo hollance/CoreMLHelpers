@@ -20,6 +20,8 @@
   IN THE SOFTWARE.
 */
 
+#if canImport(UIKit)
+
 import UIKit
 
 public extension CGImagePropertyOrientation {
@@ -60,3 +62,5 @@ extension UIImage.Orientation {
     }
   }
 }
+
+#endif

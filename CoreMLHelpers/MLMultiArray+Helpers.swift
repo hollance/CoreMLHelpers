@@ -24,11 +24,11 @@ import CoreML
 
 extension MLMultiArray {
   /**
-   Returns a new MLMultiArray with the specified dimensions.
+    Returns a new MLMultiArray with the specified dimensions.
 
-   - Note: This does not copy the data but uses a pointer into the original
-     multi-array's memory. The caller is responsible for keeping the original
-     object alive, for example using `withExtendedLifetime(originalArray) {...}`
+    - Note: This does not copy the data but uses a pointer into the original
+      multi-array's memory. The caller is responsible for keeping the original
+      object alive, for example using `withExtendedLifetime(originalArray) {...}`
   */
   @nonobjc public func reshaped(to dimensions: [Int]) throws -> MLMultiArray {
     let newCount = dimensions.reduce(1, *)
@@ -50,11 +50,11 @@ extension MLMultiArray {
   }
 
   /**
-   Returns a transposed version of this MLMultiArray.
+    Returns a transposed version of this MLMultiArray.
 
-   - Note: This copies the data.
+    - Note: This copies the data.
 
-   - TODO: Support .float32 and .int32 types too.
+    - TODO: Support .float32 and .int32 types too.
   */
   @nonobjc public func transposed(to order: [Int]) throws -> MLMultiArray {
     let ndim = order.count
