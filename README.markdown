@@ -25,7 +25,16 @@ The [Core ML Survival Guide](https://leanpub.com/coreml-survival-guide) currentl
 
 ## How to use CoreMLHelpers
 
-Simply add the source files from the **CoreMLHelpers** folder to your project. You probably don't need all of them, so just choose the files you require and ignore the rest.
+### Carthage
+
+You can install CoreMLHelpers via Carthage by adding the following line to your Cartfile:
+```
+github "hollance/CoreMLHelpers"
+```
+
+### Source
+
+Alternatively, simply add the source files from the **CoreMLHelpers** folder to your project. You probably don't need all of them, so just choose the files you require and ignore the rest.
 
 **Note:** A lot of the code in CoreMLHelpers is only intended as a demonstration of how to approach a certain problem. There's often more than one way to do it. It's quite likely you will need to customize the code for your particular situation, so use these routines as a starting point.
 
