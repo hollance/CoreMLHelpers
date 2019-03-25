@@ -1,4 +1,12 @@
-#import <Foundation/Foundation.h>
+//
+//  CoreMLHelpers.h
+//  CoreMLHelpers
+//
+//  Created by Madhava Jay on 25/3/19.
+//  Copyright © 2019 MachineThink. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
 
 //! Project version number for CoreMLHelpers.
 FOUNDATION_EXPORT double CoreMLHelpersVersionNumber;

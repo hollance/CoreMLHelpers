@@ -14,7 +14,6 @@
 		7B4A361B1F35E6FA009A6364 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B4A36191F35E6FA009A6364 /* LaunchScreen.storyboard */; };
 		7B4A36281F35EA6E009A6364 /* cat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7B4A36271F35EA6E009A6364 /* cat.jpg */; };
 		7B4AFF7F1F40863100AF62F3 /* MultiArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4AFF7E1F40863100AF62F3 /* MultiArrayTests.swift */; };
-		7B4AFF8F1F40874000AF62F3 /* CoreMLHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B4AFF8D1F40874000AF62F3 /* CoreMLHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B4AFF921F40874000AF62F3 /* CoreMLHelpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4AFF8B1F40873F00AF62F3 /* CoreMLHelpers.framework */; };
 		7B4AFF931F40874000AF62F3 /* CoreMLHelpers.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4AFF8B1F40873F00AF62F3 /* CoreMLHelpers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7B4AFF9E1F408A1400AF62F3 /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A36231F35E760009A6364 /* UIImage+CVPixelBuffer.swift */; };
@@ -35,6 +34,36 @@
 		7BD898CD21A5832800A37D3E /* MLMultiArray+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898CC21A5832800A37D3E /* MLMultiArray+Helpers.swift */; };
 		7BD898D321AC429900A37D3E /* CGImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898D221AC429900A37D3E /* CGImage+RawBytes.swift */; };
 		7BD898D521AC452D00A37D3E /* CGImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898D421AC452D00A37D3E /* CGImage+CVPixelBuffer.swift */; };
+		E2AA9DD82248EAA100A32F16 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A36241F35E760009A6364 /* Array+Extensions.swift */; };
+		E2AA9DD92248EAA100A32F16 /* CGImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898D421AC452D00A37D3E /* CGImage+CVPixelBuffer.swift */; };
+		E2AA9DDA2248EAA100A32F16 /* CGImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898D221AC429900A37D3E /* CGImage+RawBytes.swift */; };
+		E2AA9DDB2248EAA100A32F16 /* CGImagePropertyOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898A821A49BFF00A37D3E /* CGImagePropertyOrientation.swift */; };
+		E2AA9DDC2248EAA100A32F16 /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A362D1F35F062009A6364 /* CVPixelBuffer+Helpers.swift */; };
+		E2AA9DDD2248EAA100A32F16 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B56036B1F47659C004635EE /* Math.swift */; };
+		E2AA9DDE2248EAA100A32F16 /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5603671F470C60004635EE /* MLMultiArray+Image.swift */; };
+		E2AA9DDF2248EAA100A32F16 /* MLMultiArray+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898CC21A5832800A37D3E /* MLMultiArray+Helpers.swift */; };
+		E2AA9DE02248EAA100A32F16 /* NonMaxSuppression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A362F1F35F10C009A6364 /* NonMaxSuppression.swift */; };
+		E2AA9DE12248EAA100A32F16 /* Predictions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B43E9B11F361DBF0034B9BA /* Predictions.swift */; };
+		E2AA9DE22248EAA100A32F16 /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A36231F35E760009A6364 /* UIImage+CVPixelBuffer.swift */; };
+		E2AA9DE32248EAA100A32F16 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898BF21A49D7300A37D3E /* UIImage+Extensions.swift */; };
+		E2AA9DE42248EAA100A32F16 /* UIImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898A621A47FEB00A37D3E /* UIImage+RawBytes.swift */; };
+		E2AA9DE52248EAA100A32F16 /* MultiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898C221A4A95C00A37D3E /* MultiArray.swift */; };
+		E2AA9DEF2248EB2F00A32F16 /* CoreMLHelpers_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = E2AA9DED2248EB2F00A32F16 /* CoreMLHelpers_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2AA9DF42248EB4300A32F16 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A36241F35E760009A6364 /* Array+Extensions.swift */; };
+		E2AA9DF52248EB4300A32F16 /* CGImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898D421AC452D00A37D3E /* CGImage+CVPixelBuffer.swift */; };
+		E2AA9DF62248EB4300A32F16 /* CGImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898D221AC429900A37D3E /* CGImage+RawBytes.swift */; };
+		E2AA9DF82248EB4300A32F16 /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A362D1F35F062009A6364 /* CVPixelBuffer+Helpers.swift */; };
+		E2AA9DF92248EB4300A32F16 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B56036B1F47659C004635EE /* Math.swift */; };
+		E2AA9DFA2248EB4300A32F16 /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5603671F470C60004635EE /* MLMultiArray+Image.swift */; };
+		E2AA9DFB2248EB4300A32F16 /* MLMultiArray+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898CC21A5832800A37D3E /* MLMultiArray+Helpers.swift */; };
+		E2AA9DFC2248EB4300A32F16 /* NonMaxSuppression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A362F1F35F10C009A6364 /* NonMaxSuppression.swift */; };
+		E2AA9DFD2248EB4300A32F16 /* Predictions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B43E9B11F361DBF0034B9BA /* Predictions.swift */; };
+		E2AA9DFE2248EB4300A32F16 /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A36231F35E760009A6364 /* UIImage+CVPixelBuffer.swift */; };
+		E2AA9DFF2248EB4300A32F16 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898BF21A49D7300A37D3E /* UIImage+Extensions.swift */; };
+		E2AA9E002248EB4300A32F16 /* UIImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898A621A47FEB00A37D3E /* UIImage+RawBytes.swift */; };
+		E2AA9E012248EB4300A32F16 /* MultiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898C221A4A95C00A37D3E /* MultiArray.swift */; };
+		E2AA9E022248EE9200A32F16 /* CoreMLHelpers_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = E2AA9DD12248EA8B00A32F16 /* CoreMLHelpers_macOS.h */; };
+		E2AA9E032248EE9500A32F16 /* CoreMLHelpers_tvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = E2AA9D9C2248E76D00A32F16 /* CoreMLHelpers_tvOS.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,7 +115,6 @@
 		7B4AFF7E1F40863100AF62F3 /* MultiArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiArrayTests.swift; sourceTree = "<group>"; };
 		7B4AFF801F40863100AF62F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B4AFF8B1F40873F00AF62F3 /* CoreMLHelpers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreMLHelpers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B4AFF8D1F40874000AF62F3 /* CoreMLHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreMLHelpers.h; sourceTree = "<group>"; };
 		7B4AFF8E1F40874000AF62F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B4AFFA41F408CD000AF62F3 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		7B4AFFA61F408E4500AF62F3 /* NMSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMSViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +129,11 @@
 		7BD898CC21A5832800A37D3E /* MLMultiArray+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MLMultiArray+Helpers.swift"; path = "../../CoreMLHelpers/MLMultiArray+Helpers.swift"; sourceTree = "<group>"; };
 		7BD898D221AC429900A37D3E /* CGImage+RawBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGImage+RawBytes.swift"; path = "../../CoreMLHelpers/CGImage+RawBytes.swift"; sourceTree = "<group>"; };
 		7BD898D421AC452D00A37D3E /* CGImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CGImage+CVPixelBuffer.swift"; path = "../../CoreMLHelpers/CGImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
+		E2AA9D9C2248E76D00A32F16 /* CoreMLHelpers_tvOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreMLHelpers_tvOS.h; sourceTree = "<group>"; };
+		E2AA9DCF2248EA8B00A32F16 /* CoreMLHelpers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreMLHelpers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2AA9DD12248EA8B00A32F16 /* CoreMLHelpers_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreMLHelpers_macOS.h; sourceTree = "<group>"; };
+		E2AA9DEB2248EB2F00A32F16 /* CoreMLHelpers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreMLHelpers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2AA9DED2248EB2F00A32F16 /* CoreMLHelpers_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreMLHelpers_iOS.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +159,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E2AA9DCC2248EA8B00A32F16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2AA9DE82248EB2F00A32F16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -145,6 +192,8 @@
 				7B4A360D1F35E6FA009A6364 /* Demo.app */,
 				7B4AFF7C1F40863100AF62F3 /* Tests.xctest */,
 				7B4AFF8B1F40873F00AF62F3 /* CoreMLHelpers.framework */,
+				E2AA9DCF2248EA8B00A32F16 /* CoreMLHelpers.framework */,
+				E2AA9DEB2248EB2F00A32F16 /* CoreMLHelpers.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -195,7 +244,9 @@
 		7B4AFF8C1F40874000AF62F3 /* CoreMLHelpers */ = {
 			isa = PBXGroup;
 			children = (
-				7B4AFF8D1F40874000AF62F3 /* CoreMLHelpers.h */,
+				E2AA9D9C2248E76D00A32F16 /* CoreMLHelpers_tvOS.h */,
+				E2AA9DD12248EA8B00A32F16 /* CoreMLHelpers_macOS.h */,
+				E2AA9DED2248EB2F00A32F16 /* CoreMLHelpers_iOS.h */,
 				7B4AFF8E1F40874000AF62F3 /* Info.plist */,
 				7B4A36241F35E760009A6364 /* Array+Extensions.swift */,
 				7BD898D421AC452D00A37D3E /* CGImage+CVPixelBuffer.swift */,
@@ -231,7 +282,23 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B4AFF8F1F40874000AF62F3 /* CoreMLHelpers.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2AA9DCA2248EA8B00A32F16 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2AA9E022248EE9200A32F16 /* CoreMLHelpers_macOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2AA9DE62248EB2F00A32F16 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2AA9E032248EE9500A32F16 /* CoreMLHelpers_tvOS.h in Headers */,
+				E2AA9DEF2248EB2F00A32F16 /* CoreMLHelpers_iOS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,9 +342,9 @@
 			productReference = 7B4AFF7C1F40863100AF62F3 /* Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		7B4AFF8A1F40873F00AF62F3 /* CoreMLHelpers */ = {
+		7B4AFF8A1F40873F00AF62F3 /* CoreMLHelpers iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7B4AFF941F40874000AF62F3 /* Build configuration list for PBXNativeTarget "CoreMLHelpers" */;
+			buildConfigurationList = 7B4AFF941F40874000AF62F3 /* Build configuration list for PBXNativeTarget "CoreMLHelpers iOS" */;
 			buildPhases = (
 				7B4AFF861F40873F00AF62F3 /* Sources */,
 				7B4AFF871F40873F00AF62F3 /* Frameworks */,
@@ -288,9 +355,45 @@
 			);
 			dependencies = (
 			);
-			name = CoreMLHelpers;
+			name = "CoreMLHelpers iOS";
 			productName = CoreMLHelpers;
 			productReference = 7B4AFF8B1F40873F00AF62F3 /* CoreMLHelpers.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E2AA9DCE2248EA8B00A32F16 /* CoreMLHelpers macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E2AA9DD42248EA8B00A32F16 /* Build configuration list for PBXNativeTarget "CoreMLHelpers macOS" */;
+			buildPhases = (
+				E2AA9DCA2248EA8B00A32F16 /* Headers */,
+				E2AA9DCB2248EA8B00A32F16 /* Sources */,
+				E2AA9DCC2248EA8B00A32F16 /* Frameworks */,
+				E2AA9DCD2248EA8B00A32F16 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CoreMLHelpers macOS";
+			productName = "CoreMLHelpers-macOS";
+			productReference = E2AA9DCF2248EA8B00A32F16 /* CoreMLHelpers.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E2AA9DEA2248EB2F00A32F16 /* CoreMLHelpers tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E2AA9DF02248EB2F00A32F16 /* Build configuration list for PBXNativeTarget "CoreMLHelpers tvOS" */;
+			buildPhases = (
+				E2AA9DE62248EB2F00A32F16 /* Headers */,
+				E2AA9DE72248EB2F00A32F16 /* Sources */,
+				E2AA9DE82248EB2F00A32F16 /* Frameworks */,
+				E2AA9DE92248EB2F00A32F16 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CoreMLHelpers tvOS";
+			productName = CoreMLHelpers;
+			productReference = E2AA9DEB2248EB2F00A32F16 /* CoreMLHelpers.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -299,7 +402,7 @@
 		7B4A36051F35E6FA009A6364 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = MachineThink;
 				TargetAttributes = {
@@ -315,6 +418,15 @@
 					7B4AFF8A1F40873F00AF62F3 = {
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 1000;
+						ProvisioningStyle = Automatic;
+					};
+					E2AA9DCE2248EA8B00A32F16 = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
+					};
+					E2AA9DEA2248EB2F00A32F16 = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -333,7 +445,9 @@
 			targets = (
 				7B4A360C1F35E6FA009A6364 /* Demo */,
 				7B4AFF7B1F40863100AF62F3 /* Tests */,
-				7B4AFF8A1F40873F00AF62F3 /* CoreMLHelpers */,
+				7B4AFF8A1F40873F00AF62F3 /* CoreMLHelpers iOS */,
+				E2AA9DCE2248EA8B00A32F16 /* CoreMLHelpers macOS */,
+				E2AA9DEA2248EB2F00A32F16 /* CoreMLHelpers tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -359,6 +473,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		7B4AFF891F40873F00AF62F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2AA9DCD2248EA8B00A32F16 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2AA9DE92248EB2F00A32F16 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -409,6 +537,47 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E2AA9DCB2248EA8B00A32F16 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2AA9DE42248EAA100A32F16 /* UIImage+RawBytes.swift in Sources */,
+				E2AA9DE12248EAA100A32F16 /* Predictions.swift in Sources */,
+				E2AA9DD82248EAA100A32F16 /* Array+Extensions.swift in Sources */,
+				E2AA9DE52248EAA100A32F16 /* MultiArray.swift in Sources */,
+				E2AA9DDC2248EAA100A32F16 /* CVPixelBuffer+Helpers.swift in Sources */,
+				E2AA9DE32248EAA100A32F16 /* UIImage+Extensions.swift in Sources */,
+				E2AA9DD92248EAA100A32F16 /* CGImage+CVPixelBuffer.swift in Sources */,
+				E2AA9DE22248EAA100A32F16 /* UIImage+CVPixelBuffer.swift in Sources */,
+				E2AA9DDE2248EAA100A32F16 /* MLMultiArray+Image.swift in Sources */,
+				E2AA9DDB2248EAA100A32F16 /* CGImagePropertyOrientation.swift in Sources */,
+				E2AA9DDA2248EAA100A32F16 /* CGImage+RawBytes.swift in Sources */,
+				E2AA9DDF2248EAA100A32F16 /* MLMultiArray+Helpers.swift in Sources */,
+				E2AA9DE02248EAA100A32F16 /* NonMaxSuppression.swift in Sources */,
+				E2AA9DDD2248EAA100A32F16 /* Math.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2AA9DE72248EB2F00A32F16 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2AA9DF52248EB4300A32F16 /* CGImage+CVPixelBuffer.swift in Sources */,
+				E2AA9E002248EB4300A32F16 /* UIImage+RawBytes.swift in Sources */,
+				E2AA9DF92248EB4300A32F16 /* Math.swift in Sources */,
+				E2AA9DFA2248EB4300A32F16 /* MLMultiArray+Image.swift in Sources */,
+				E2AA9DF82248EB4300A32F16 /* CVPixelBuffer+Helpers.swift in Sources */,
+				E2AA9E012248EB4300A32F16 /* MultiArray.swift in Sources */,
+				E2AA9DFD2248EB4300A32F16 /* Predictions.swift in Sources */,
+				E2AA9DFE2248EB4300A32F16 /* UIImage+CVPixelBuffer.swift in Sources */,
+				E2AA9DF62248EB4300A32F16 /* CGImage+RawBytes.swift in Sources */,
+				E2AA9DFB2248EB4300A32F16 /* MLMultiArray+Helpers.swift in Sources */,
+				E2AA9DFF2248EB4300A32F16 /* UIImage+Extensions.swift in Sources */,
+				E2AA9DFC2248EB4300A32F16 /* NonMaxSuppression.swift in Sources */,
+				E2AA9DF42248EB4300A32F16 /* Array+Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -419,7 +588,7 @@
 		};
 		7B4AFF911F40874000AF62F3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7B4AFF8A1F40873F00AF62F3 /* CoreMLHelpers */;
+			target = 7B4AFF8A1F40873F00AF62F3 /* CoreMLHelpers iOS */;
 			targetProxy = 7B4AFF901F40874000AF62F3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -560,7 +729,6 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = MGCEKGP4Y4;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.machinethink.Demo;
@@ -575,7 +743,6 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = MGCEKGP4Y4;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.machinethink.Demo;
@@ -589,7 +756,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = MGCEKGP4Y4;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.machinethink.CoreMLHelpersTests;
@@ -604,7 +770,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = MGCEKGP4Y4;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.machinethink.CoreMLHelpersTests;
@@ -618,19 +783,22 @@
 		7B4AFF951F40874000AF62F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = MGCEKGP4Y4;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CoreMLHelpers/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.machinethink.CoreMLHelpers;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.machinethink.CoreMLHelpers-iOS";
+				PRODUCT_NAME = CoreMLHelpers;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -641,21 +809,136 @@
 		7B4AFF961F40874000AF62F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = MGCEKGP4Y4;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CoreMLHelpers/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.machinethink.CoreMLHelpers;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.machinethink.CoreMLHelpers-iOS";
+				PRODUCT_NAME = CoreMLHelpers;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E2AA9DD52248EA8B00A32F16 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = CoreMLHelpers/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.machinethink.CoreMLHelpers-macOS";
+				PRODUCT_NAME = CoreMLHelpers;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E2AA9DD62248EA8B00A32F16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = CoreMLHelpers/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.machinethink.CoreMLHelpers-macOS";
+				PRODUCT_NAME = CoreMLHelpers;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E2AA9DF12248EB2F00A32F16 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CoreMLHelpers/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.machinethink.CoreMLHelpers-tvOS";
+				PRODUCT_NAME = CoreMLHelpers;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E2AA9DF22248EB2F00A32F16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CoreMLHelpers/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.machinethink.CoreMLHelpers-tvOS";
+				PRODUCT_NAME = CoreMLHelpers;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -691,11 +974,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7B4AFF941F40874000AF62F3 /* Build configuration list for PBXNativeTarget "CoreMLHelpers" */ = {
+		7B4AFF941F40874000AF62F3 /* Build configuration list for PBXNativeTarget "CoreMLHelpers iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B4AFF951F40874000AF62F3 /* Debug */,
 				7B4AFF961F40874000AF62F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E2AA9DD42248EA8B00A32F16 /* Build configuration list for PBXNativeTarget "CoreMLHelpers macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2AA9DD52248EA8B00A32F16 /* Debug */,
+				E2AA9DD62248EA8B00A32F16 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E2AA9DF02248EB2F00A32F16 /* Build configuration list for PBXNativeTarget "CoreMLHelpers tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2AA9DF12248EB2F00A32F16 /* Debug */,
+				E2AA9DF22248EB2F00A32F16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
