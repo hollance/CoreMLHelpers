@@ -195,3 +195,91 @@ public func rotate90PixelBuffer(_ srcPixelBuffer: CVPixelBuffer, factor: UInt8) 
   }
   return dstPixelBuffer
 }
+
+/**
+ Copies a CVPixelBuffer to a new CVPixelBuffer backed by an IOSurface compatible with Metal
+ If CVMetalTextureCacheCreateTextureFromImage is failing then make sure you have an IOSurface Backed CVPixelBuffer
+ For other options see: https://developer.apple.com/documentation/metal/mixing_metal_and_opengl_rendering_in_a_view
+ - String(kCVPixelBufferOpenGLCompatibilityKey): true,
+ - String(kCVPixelBufferIOSurfacePropertiesKey): [
+     "IOSurfaceOpenGLESFBOCompatibility": true,
+     "IOSurfaceOpenGLESTextureCompatibility": true,
+     "IOSurfaceCoreAnimationCompatibility": true
+   ]
+ */
+func copyToIOSurfaceBackedPixelBuffer(_ pixelBuffer: CVPixelBuffer) -> CVPixelBuffer? {
+  let pixelBufferAttributes = [
+    String(kCVPixelBufferMetalCompatibilityKey): true
+    ]
+  return pixelBuffer.deepCopyWithAttributes(pixelBufferAttributes)
+}
+
+extension CVPixelBuffer {
+  /**
+   Copies a CVPixelBuffer to a new CVPixelBuffer with no options
+   */
+  func deepCopy() -> CVPixelBuffer? {
+    let emptyAttributes: [String: Any] = [:]
+    return self.deepCopyWithAttributes(emptyAttributes)
+  }
+
+  /**
+   Copies a CVPixelBuffer to a new CVPixelBuffer with allowing options
+   See: https://developer.apple.com/library/archive/qa/qa1781/_index.html
+   */
+  func deepCopyWithAttributes(_ attributes: [String: Any]) -> CVPixelBuffer? {
+    let sourceFlag: CVPixelBufferLockFlags = .readOnly
+    guard kCVReturnSuccess == CVPixelBufferLockBaseAddress(self, sourceFlag) else {
+      return nil
+    }
+    defer { CVPixelBufferUnlockBaseAddress(self, sourceFlag) }
+
+    var combinedAttributes: [String: Any] = [:]
+
+    // copy attachment attributes
+    if let attachments = CVBufferGetAttachments(self, .shouldPropagate) as? [String: Any] {
+      for (key, value) in attachments {
+        combinedAttributes[key] = value
+      }
+    }
+
+    // add user attributes
+    let attributesCFDict = combinedAttributes.merging(attributes) { $1 } as CFDictionary
+
+    var _copy: CVPixelBuffer?
+    CVPixelBufferCreate(
+      nil,
+      CVPixelBufferGetWidth(self),
+      CVPixelBufferGetHeight(self),
+      CVPixelBufferGetPixelFormatType(self),
+      attributesCFDict,
+      &_copy
+    )
+
+    guard let copy = _copy else { fatalError() }
+
+    CVPixelBufferLockBaseAddress(copy, CVPixelBufferLockFlags(rawValue: 0))
+
+    // important as plane 0 is a valid plane
+    // ClosedRange from 0 -> max(0, count-1)
+    for plane in 0...max(0, CVPixelBufferGetPlaneCount(self) - 1) {
+      let dest = CVPixelBufferGetBaseAddressOfPlane(copy, plane)
+      let source = CVPixelBufferGetBaseAddressOfPlane(self, plane)
+      let height = CVPixelBufferGetHeightOfPlane(self, plane)
+      let bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(self, plane)
+      let bytesPerRowDst = CVPixelBufferGetBytesPerRowOfPlane(copy, plane)
+
+      for h in 0..<height {
+        memcpy(
+          dest?.advanced(by: h*bytesPerRowDst),
+          source?.advanced(by: h*bytesPerRow),
+          bytesPerRow
+        )
+      }
+    }
+
+    CVPixelBufferUnlockBaseAddress(copy, CVPixelBufferLockFlags(rawValue: 0))
+
+    return copy
+  }
+}
