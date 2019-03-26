@@ -207,14 +207,14 @@ public func rotate90PixelBuffer(_ srcPixelBuffer: CVPixelBuffer, factor: UInt8) 
      "IOSurfaceCoreAnimationCompatibility": true
    ]
  */
-func copyToIOSurfaceBackedPixelBuffer(_ pixelBuffer: CVPixelBuffer) -> CVPixelBuffer? {
+public func copyToIOSurfaceBackedPixelBuffer(_ pixelBuffer: CVPixelBuffer) -> CVPixelBuffer? {
   let pixelBufferAttributes = [
     String(kCVPixelBufferMetalCompatibilityKey): true
     ]
   return pixelBuffer.deepCopyWithAttributes(pixelBufferAttributes)
 }
 
-extension CVPixelBuffer {
+public extension CVPixelBuffer {
   /**
    Copies a CVPixelBuffer to a new CVPixelBuffer with no options
    */
