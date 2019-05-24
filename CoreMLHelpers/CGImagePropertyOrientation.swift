@@ -38,7 +38,11 @@ public extension CGImagePropertyOrientation {
     @unknown default: self = .up
     }
   }
+}
 
+#if !os(tvOS)
+
+public extension CGImagePropertyOrientation {
   init(_ orientation: UIDeviceOrientation) {
     switch orientation {
     case .portraitUpsideDown: self = .left
@@ -48,6 +52,8 @@ public extension CGImagePropertyOrientation {
     }
   }
 }
+
+#endif
 
 extension UIImage.Orientation {
   init(_ cgOrientation: UIImage.Orientation) {

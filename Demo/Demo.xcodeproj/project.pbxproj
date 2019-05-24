@@ -28,6 +28,35 @@
 		7B5603661F470A1D004635EE /* cat.bin in Resources */ = {isa = PBXBuildFile; fileRef = 7B5603651F470A1D004635EE /* cat.bin */; };
 		7B5603681F470C60004635EE /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5603671F470C60004635EE /* MLMultiArray+Image.swift */; };
 		7B56036C1F47659C004635EE /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B56036B1F47659C004635EE /* Math.swift */; };
+		7B6B4F2122983987002D95D0 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A36241F35E760009A6364 /* Array+Extensions.swift */; };
+		7B6B4F2222983987002D95D0 /* CGImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898D421AC452D00A37D3E /* CGImage+CVPixelBuffer.swift */; };
+		7B6B4F2322983987002D95D0 /* CGImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898D221AC429900A37D3E /* CGImage+RawBytes.swift */; };
+		7B6B4F2422983987002D95D0 /* CGImagePropertyOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898A821A49BFF00A37D3E /* CGImagePropertyOrientation.swift */; };
+		7B6B4F2522983987002D95D0 /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A362D1F35F062009A6364 /* CVPixelBuffer+Helpers.swift */; };
+		7B6B4F2622983987002D95D0 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B56036B1F47659C004635EE /* Math.swift */; };
+		7B6B4F2722983987002D95D0 /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5603671F470C60004635EE /* MLMultiArray+Image.swift */; };
+		7B6B4F2822983987002D95D0 /* MLMultiArray+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898CC21A5832800A37D3E /* MLMultiArray+Helpers.swift */; };
+		7B6B4F2922983987002D95D0 /* NonMaxSuppression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A362F1F35F10C009A6364 /* NonMaxSuppression.swift */; };
+		7B6B4F2A22983987002D95D0 /* Predictions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B43E9B11F361DBF0034B9BA /* Predictions.swift */; };
+		7B6B4F2B22983987002D95D0 /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A36231F35E760009A6364 /* UIImage+CVPixelBuffer.swift */; };
+		7B6B4F2C22983987002D95D0 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898BF21A49D7300A37D3E /* UIImage+Extensions.swift */; };
+		7B6B4F2D22983987002D95D0 /* UIImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898A621A47FEB00A37D3E /* UIImage+RawBytes.swift */; };
+		7B6B4F2E22983987002D95D0 /* MultiArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898C221A4A95C00A37D3E /* MultiArray.swift */; };
+		7B6B4F2F22983A2C002D95D0 /* CoreMLHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B4AFF8D1F40874000AF62F3 /* CoreMLHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B6B4F3D22983A80002D95D0 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A36241F35E760009A6364 /* Array+Extensions.swift */; };
+		7B6B4F3E22983A80002D95D0 /* CGImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898D421AC452D00A37D3E /* CGImage+CVPixelBuffer.swift */; };
+		7B6B4F3F22983A80002D95D0 /* CGImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898D221AC429900A37D3E /* CGImage+RawBytes.swift */; };
+		7B6B4F4022983A80002D95D0 /* CGImagePropertyOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898A821A49BFF00A37D3E /* CGImagePropertyOrientation.swift */; };
+		7B6B4F4122983A80002D95D0 /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A362D1F35F062009A6364 /* CVPixelBuffer+Helpers.swift */; };
+		7B6B4F4222983A80002D95D0 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B56036B1F47659C004635EE /* Math.swift */; };
+		7B6B4F4322983A80002D95D0 /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5603671F470C60004635EE /* MLMultiArray+Image.swift */; };
+		7B6B4F4422983A80002D95D0 /* MLMultiArray+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898CC21A5832800A37D3E /* MLMultiArray+Helpers.swift */; };
+		7B6B4F4522983A80002D95D0 /* NonMaxSuppression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A362F1F35F10C009A6364 /* NonMaxSuppression.swift */; };
+		7B6B4F4622983A80002D95D0 /* Predictions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B43E9B11F361DBF0034B9BA /* Predictions.swift */; };
+		7B6B4F4722983A80002D95D0 /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4A36231F35E760009A6364 /* UIImage+CVPixelBuffer.swift */; };
+		7B6B4F4822983A80002D95D0 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898BF21A49D7300A37D3E /* UIImage+Extensions.swift */; };
+		7B6B4F4922983A80002D95D0 /* UIImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898A621A47FEB00A37D3E /* UIImage+RawBytes.swift */; };
+		7B6B4F4A22983A82002D95D0 /* CoreMLHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B4AFF8D1F40874000AF62F3 /* CoreMLHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BD898A721A47FEB00A37D3E /* UIImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898A621A47FEB00A37D3E /* UIImage+RawBytes.swift */; };
 		7BD898A921A49BFF00A37D3E /* CGImagePropertyOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898A821A49BFF00A37D3E /* CGImagePropertyOrientation.swift */; };
 		7BD898C021A49D7300A37D3E /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD898BF21A49D7300A37D3E /* UIImage+Extensions.swift */; };
@@ -94,6 +123,8 @@
 		7B5603651F470A1D004635EE /* cat.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = cat.bin; path = ../../Images/cat.bin; sourceTree = "<group>"; };
 		7B5603671F470C60004635EE /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MLMultiArray+Image.swift"; path = "../../CoreMLHelpers/MLMultiArray+Image.swift"; sourceTree = "<group>"; };
 		7B56036B1F47659C004635EE /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Math.swift; path = ../../CoreMLHelpers/Math.swift; sourceTree = "<group>"; };
+		7B6B4F1722983906002D95D0 /* CoreMLHelpers_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreMLHelpers_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B6B4F3522983A52002D95D0 /* CoreMLHelpers_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreMLHelpers_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BD898A621A47FEB00A37D3E /* UIImage+RawBytes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+RawBytes.swift"; path = "../../CoreMLHelpers/UIImage+RawBytes.swift"; sourceTree = "<group>"; };
 		7BD898A821A49BFF00A37D3E /* CGImagePropertyOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CGImagePropertyOrientation.swift; path = ../../CoreMLHelpers/CGImagePropertyOrientation.swift; sourceTree = "<group>"; };
 		7BD898BF21A49D7300A37D3E /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Extensions.swift"; path = "../../CoreMLHelpers/UIImage+Extensions.swift"; sourceTree = "<group>"; };
@@ -126,6 +157,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7B6B4F1422983906002D95D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B6B4F3222983A52002D95D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -145,6 +190,8 @@
 				7B4A360D1F35E6FA009A6364 /* Demo.app */,
 				7B4AFF7C1F40863100AF62F3 /* Tests.xctest */,
 				7B4AFF8B1F40873F00AF62F3 /* CoreMLHelpers.framework */,
+				7B6B4F1722983906002D95D0 /* CoreMLHelpers_macOS.framework */,
+				7B6B4F3522983A52002D95D0 /* CoreMLHelpers_tvOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -235,6 +282,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7B6B4F1222983906002D95D0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B6B4F2F22983A2C002D95D0 /* CoreMLHelpers.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B6B4F3022983A52002D95D0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B6B4F4A22983A82002D95D0 /* CoreMLHelpers.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -293,6 +356,42 @@
 			productReference = 7B4AFF8B1F40873F00AF62F3 /* CoreMLHelpers.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		7B6B4F1622983906002D95D0 /* CoreMLHelpers macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B6B4F1C22983906002D95D0 /* Build configuration list for PBXNativeTarget "CoreMLHelpers macOS" */;
+			buildPhases = (
+				7B6B4F1222983906002D95D0 /* Headers */,
+				7B6B4F1322983906002D95D0 /* Sources */,
+				7B6B4F1422983906002D95D0 /* Frameworks */,
+				7B6B4F1522983906002D95D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CoreMLHelpers macOS";
+			productName = "CoreMLHelpers macOS";
+			productReference = 7B6B4F1722983906002D95D0 /* CoreMLHelpers_macOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7B6B4F3422983A52002D95D0 /* CoreMLHelpers tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B6B4F3A22983A52002D95D0 /* Build configuration list for PBXNativeTarget "CoreMLHelpers tvOS" */;
+			buildPhases = (
+				7B6B4F3022983A52002D95D0 /* Headers */,
+				7B6B4F3122983A52002D95D0 /* Sources */,
+				7B6B4F3222983A52002D95D0 /* Frameworks */,
+				7B6B4F3322983A52002D95D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CoreMLHelpers tvOS";
+			productName = "CoreMLHelpers tvOS";
+			productReference = 7B6B4F3522983A52002D95D0 /* CoreMLHelpers_tvOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -316,6 +415,14 @@
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 1020;
 					};
+					7B6B4F1622983906002D95D0 = {
+						CreatedOnToolsVersion = 10.2;
+						ProvisioningStyle = Automatic;
+					};
+					7B6B4F3422983A52002D95D0 = {
+						CreatedOnToolsVersion = 10.2;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 7B4A36081F35E6FA009A6364 /* Build configuration list for PBXProject "Demo" */;
@@ -334,6 +441,8 @@
 				7B4A360C1F35E6FA009A6364 /* Demo */,
 				7B4AFF7B1F40863100AF62F3 /* Tests */,
 				7B4AFF8A1F40873F00AF62F3 /* CoreMLHelpers */,
+				7B6B4F1622983906002D95D0 /* CoreMLHelpers macOS */,
+				7B6B4F3422983A52002D95D0 /* CoreMLHelpers tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -359,6 +468,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		7B4AFF891F40873F00AF62F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B6B4F1522983906002D95D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B6B4F3322983A52002D95D0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -406,6 +529,47 @@
 				7B4AFF9F1F408AE700AF62F3 /* CVPixelBuffer+Helpers.swift in Sources */,
 				7BD898CD21A5832800A37D3E /* MLMultiArray+Helpers.swift in Sources */,
 				7B56036C1F47659C004635EE /* Math.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B6B4F1322983906002D95D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B6B4F2D22983987002D95D0 /* UIImage+RawBytes.swift in Sources */,
+				7B6B4F2A22983987002D95D0 /* Predictions.swift in Sources */,
+				7B6B4F2122983987002D95D0 /* Array+Extensions.swift in Sources */,
+				7B6B4F2E22983987002D95D0 /* MultiArray.swift in Sources */,
+				7B6B4F2522983987002D95D0 /* CVPixelBuffer+Helpers.swift in Sources */,
+				7B6B4F2C22983987002D95D0 /* UIImage+Extensions.swift in Sources */,
+				7B6B4F2222983987002D95D0 /* CGImage+CVPixelBuffer.swift in Sources */,
+				7B6B4F2B22983987002D95D0 /* UIImage+CVPixelBuffer.swift in Sources */,
+				7B6B4F2722983987002D95D0 /* MLMultiArray+Image.swift in Sources */,
+				7B6B4F2422983987002D95D0 /* CGImagePropertyOrientation.swift in Sources */,
+				7B6B4F2322983987002D95D0 /* CGImage+RawBytes.swift in Sources */,
+				7B6B4F2822983987002D95D0 /* MLMultiArray+Helpers.swift in Sources */,
+				7B6B4F2922983987002D95D0 /* NonMaxSuppression.swift in Sources */,
+				7B6B4F2622983987002D95D0 /* Math.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B6B4F3122983A52002D95D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B6B4F4922983A80002D95D0 /* UIImage+RawBytes.swift in Sources */,
+				7B6B4F4622983A80002D95D0 /* Predictions.swift in Sources */,
+				7B6B4F3D22983A80002D95D0 /* Array+Extensions.swift in Sources */,
+				7B6B4F4122983A80002D95D0 /* CVPixelBuffer+Helpers.swift in Sources */,
+				7B6B4F4822983A80002D95D0 /* UIImage+Extensions.swift in Sources */,
+				7B6B4F3E22983A80002D95D0 /* CGImage+CVPixelBuffer.swift in Sources */,
+				7B6B4F4722983A80002D95D0 /* UIImage+CVPixelBuffer.swift in Sources */,
+				7B6B4F4322983A80002D95D0 /* MLMultiArray+Image.swift in Sources */,
+				7B6B4F4022983A80002D95D0 /* CGImagePropertyOrientation.swift in Sources */,
+				7B6B4F3F22983A80002D95D0 /* CGImage+RawBytes.swift in Sources */,
+				7B6B4F4422983A80002D95D0 /* MLMultiArray+Helpers.swift in Sources */,
+				7B6B4F4522983A80002D95D0 /* NonMaxSuppression.swift in Sources */,
+				7B6B4F4222983A80002D95D0 /* Math.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,6 +825,122 @@
 			};
 			name = Release;
 		};
+		7B6B4F1D22983906002D95D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = MGCEKGP4Y4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = CoreMLHelpers/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.machinethink.CoreMLHelpers-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7B6B4F1E22983906002D95D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = MGCEKGP4Y4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = CoreMLHelpers/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.machinethink.CoreMLHelpers-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7B6B4F3B22983A52002D95D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = MGCEKGP4Y4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CoreMLHelpers/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.machinethink.CoreMLHelpers-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 12.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7B6B4F3C22983A52002D95D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = MGCEKGP4Y4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CoreMLHelpers/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.machinethink.CoreMLHelpers-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 12.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -696,6 +976,24 @@
 			buildConfigurations = (
 				7B4AFF951F40874000AF62F3 /* Debug */,
 				7B4AFF961F40874000AF62F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7B6B4F1C22983906002D95D0 /* Build configuration list for PBXNativeTarget "CoreMLHelpers macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B6B4F1D22983906002D95D0 /* Debug */,
+				7B6B4F1E22983906002D95D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7B6B4F3A22983A52002D95D0 /* Build configuration list for PBXNativeTarget "CoreMLHelpers tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B6B4F3B22983A52002D95D0 /* Debug */,
+				7B6B4F3C22983A52002D95D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
