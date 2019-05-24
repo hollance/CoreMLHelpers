@@ -204,3 +204,87 @@ public func rotate90PixelBuffer(_ srcPixelBuffer: CVPixelBuffer, factor: UInt8) 
   }
   return dstPixelBuffer
 }
+
+public extension CVPixelBuffer {
+  /**
+    Copies a CVPixelBuffer to a new CVPixelBuffer that is compatible with Metal.
+
+    - Tip: If CVMetalTextureCacheCreateTextureFromImage is failing, then call
+      this method first!
+  */
+  func copyToMetalCompatible() -> CVPixelBuffer? {
+    // Other possible options:
+    //   String(kCVPixelBufferOpenGLCompatibilityKey): true,
+    //   String(kCVPixelBufferIOSurfacePropertiesKey): [
+    //     "IOSurfaceOpenGLESFBOCompatibility": true,
+    //     "IOSurfaceOpenGLESTextureCompatibility": true,
+    //     "IOSurfaceCoreAnimationCompatibility": true
+    //   ]
+    let attributes: [String: Any] = [
+      String(kCVPixelBufferMetalCompatibilityKey): true,
+    ]
+    return deepCopy(withAttributes: attributes)
+  }
+
+  /**
+    Copies a CVPixelBuffer to a new CVPixelBuffer.
+
+    This lets you specify new attributes, such as whether the new CVPixelBuffer
+    must be IOSurface-backed.
+
+    See: https://developer.apple.com/library/archive/qa/qa1781/_index.html
+  */
+  func deepCopy(withAttributes attributes: [String: Any] = [:]) -> CVPixelBuffer? {
+    let srcPixelBuffer = self
+    let srcFlags: CVPixelBufferLockFlags = .readOnly
+    guard kCVReturnSuccess == CVPixelBufferLockBaseAddress(srcPixelBuffer, srcFlags) else {
+      return nil
+    }
+    defer { CVPixelBufferUnlockBaseAddress(srcPixelBuffer, srcFlags) }
+
+    var combinedAttributes: [String: Any] = [:]
+
+    // Copy attachment attributes.
+    if let attachments = CVBufferGetAttachments(srcPixelBuffer, .shouldPropagate) as? [String: Any] {
+      for (key, value) in attachments {
+        combinedAttributes[key] = value
+      }
+    }
+
+    // Add user attributes.
+    combinedAttributes = combinedAttributes.merging(attributes) { $1 }
+
+    var maybePixelBuffer: CVPixelBuffer?
+    let status = CVPixelBufferCreate(kCFAllocatorDefault,
+                                     CVPixelBufferGetWidth(srcPixelBuffer),
+                                     CVPixelBufferGetHeight(srcPixelBuffer),
+                                     CVPixelBufferGetPixelFormatType(srcPixelBuffer),
+                                     combinedAttributes as CFDictionary,
+                                     &maybePixelBuffer)
+
+    guard status == kCVReturnSuccess, let dstPixelBuffer = maybePixelBuffer else {
+      return nil
+    }
+
+    let dstFlags = CVPixelBufferLockFlags(rawValue: 0)
+    guard kCVReturnSuccess == CVPixelBufferLockBaseAddress(dstPixelBuffer, dstFlags) else {
+      return nil
+    }
+    defer { CVPixelBufferUnlockBaseAddress(dstPixelBuffer, dstFlags) }
+
+    for plane in 0...max(0, CVPixelBufferGetPlaneCount(srcPixelBuffer) - 1) {
+      if let srcAddr = CVPixelBufferGetBaseAddressOfPlane(srcPixelBuffer, plane),
+         let dstAddr = CVPixelBufferGetBaseAddressOfPlane(dstPixelBuffer, plane) {
+        let srcBytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(srcPixelBuffer, plane)
+        let dstBytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(dstPixelBuffer, plane)
+
+        for h in 0..<CVPixelBufferGetHeightOfPlane(srcPixelBuffer, plane) {
+          let srcPtr = srcAddr.advanced(by: h*srcBytesPerRow)
+          let dstPtr = dstAddr.advanced(by: h*dstBytesPerRow)
+          dstPtr.copyMemory(from: srcPtr, byteCount: srcBytesPerRow)
+        }
+      }
+    }
+    return dstPixelBuffer
+  }
+}
