@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2017-2018 M.I. Hollemans
+  Copyright (c) 2017-2019 M.I. Hollemans
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -86,6 +86,8 @@ extension MLMultiArray {
       return _image(min: Float(min), max: Float(max), channel: channel, axes: axes)
     case .int32:
       return _image(min: Int32(min), max: Int32(max), channel: channel, axes: axes)
+    @unknown default:
+      fatalError("Unsupported data type \(dataType.rawValue)")
     }
   }
 

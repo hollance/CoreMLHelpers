@@ -15,7 +15,7 @@ Experimental features:
 
 Let me know if there's anything else you'd like to see added to this library!
 
-## Tip: Get the Core ML Survival Guide
+## :bulb: Tip: Get the Core ML Survival Guide
 
 If Core ML is giving you trouble --- or if you want to learn more about using the Core ML and Vision APIs --- then check out my new book [Core ML Survival Guide](https://leanpub.com/coreml-survival-guide). It has 300+ pages of Core ML tips and tricks.
 
@@ -25,9 +25,22 @@ The [Core ML Survival Guide](https://leanpub.com/coreml-survival-guide) currentl
 
 ## How to use CoreMLHelpers
 
-Simply add the source files from the **CoreMLHelpers** folder to your project. You probably don't need all of them, so just choose the files you require and ignore the rest.
+### The simplest method
 
-**Note:** A lot of the code in CoreMLHelpers is only intended as a demonstration of how to approach a certain problem. There's often more than one way to do it. It's quite likely you will need to customize the code for your particular situation, so use these routines as a starting point.
+Copy the source files from the **CoreMLHelpers** folder into your project. You probably don't need all of them, so just pick the files you require and ignore the rest.
+
+> **Note:** A lot of the code in CoreMLHelpers is only intended as a demonstration of how to approach a certain problem. There's often more than one way to do it. It's quite likely you will need to customize the code for your particular situation, so use these routines as a starting point.
+
+### Carthage
+
+You can install CoreMLHelpers via Carthage by adding the following line to your Cartfile:
+```
+github "hollance/CoreMLHelpers"
+```
+
+### CocoaPods
+
+Not sure how this works, I never use CocoaPods.
 
 ## Read more about Core ML
 
@@ -41,4 +54,4 @@ Simply add the source files from the **CoreMLHelpers** folder to your project. Y
 
 ## License
 
-CoreMLHelpers is copyright 2017-2018 Matthijs Hollemans and is licensed under the terms of the [MIT license](LICENSE.txt).
+CoreMLHelpers is copyright 2017-2019 Matthijs Hollemans and is licensed under the terms of the [MIT license](LICENSE.txt).

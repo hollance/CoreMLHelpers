@@ -41,6 +41,9 @@ public func createPixelBuffer(width: Int, height: Int) -> CVPixelBuffer? {
 
 /**
   First crops the pixel buffer, then resizes it.
+
+  - Note: The new CVPixelBuffer is not backed by an IOSurface and therefore
+    cannot be turned into a Metal texture.
 */
 public func resizePixelBuffer(_ srcPixelBuffer: CVPixelBuffer,
                               cropX: Int,
@@ -105,6 +108,9 @@ public func resizePixelBuffer(_ srcPixelBuffer: CVPixelBuffer,
 
 /**
   Resizes a CVPixelBuffer to a new width and height.
+
+  - Note: The new CVPixelBuffer is not backed by an IOSurface and therefore
+    cannot be turned into a Metal texture.
 */
 public func resizePixelBuffer(_ pixelBuffer: CVPixelBuffer,
                               width: Int, height: Int) -> CVPixelBuffer? {
@@ -130,6 +136,9 @@ public func resizePixelBuffer(_ pixelBuffer: CVPixelBuffer,
 
 /**
   Rotates CVPixelBuffer by the provided factor of 90 counterclock-wise.
+
+  - Note: The new CVPixelBuffer is not backed by an IOSurface and therefore
+    cannot be turned into a Metal texture.
 */
 public func rotate90PixelBuffer(_ srcPixelBuffer: CVPixelBuffer, factor: UInt8) -> CVPixelBuffer? {
   let flags = CVPixelBufferLockFlags(rawValue: 0)

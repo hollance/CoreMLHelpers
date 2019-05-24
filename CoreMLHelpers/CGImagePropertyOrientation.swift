@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2017-2018 M.I. Hollemans
+  Copyright (c) 2017-2019 M.I. Hollemans
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -35,6 +35,7 @@ public extension CGImagePropertyOrientation {
     case .leftMirrored: self = .leftMirrored
     case .right: self = .right
     case .rightMirrored: self = .rightMirrored
+    @unknown default: self = .up
     }
   }
 
@@ -59,6 +60,7 @@ extension UIImage.Orientation {
     case .leftMirrored: self = .leftMirrored
     case .right: self = .right
     case .rightMirrored: self = .rightMirrored
+    @unknown default: self = .up
     }
   }
 }

@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2017-2018 M.I. Hollemans
+  Copyright (c) 2017-2019 M.I. Hollemans
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -30,7 +30,7 @@ import Accelerate
     - count: If provided, only look at the first `count` elements of the array,
              otherwise look at the entire array.
 */
-public func argmax(_ array: [Float], count: Int?) -> (Int, Float) {
+public func argmax(_ array: [Float], count: Int? = nil) -> (Int, Float) {
   var maxValue: Float = 0
   var maxIndex: vDSP_Length = 0
   vDSP_maxvi(array, 1, &maxValue, &maxIndex, vDSP_Length(count ?? array.count))
@@ -59,7 +59,7 @@ public func argmax(_ ptr: UnsafePointer<Float>, count: Int, stride: Int = 1) -> 
     - count: If provided, only look at the first `count` elements of the array,
              otherwise look at the entire array.
 */
-public func argmax(_ array: [Double], count: Int?) -> (Int, Double) {
+public func argmax(_ array: [Double], count: Int? = nil) -> (Int, Double) {
   var maxValue: Double = 0
   var maxIndex: vDSP_Length = 0
   vDSP_maxviD(array, 1, &maxValue, &maxIndex, vDSP_Length(count ?? array.count))
