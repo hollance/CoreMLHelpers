@@ -146,7 +146,13 @@ extension MLMultiArray {
         print("Invalid axes \(axes) for shape \(shape)")
         return nil
       }
+    } else if shape.count == 2 {
+      // Expected shape for grayscale is (height, width)
+      heightAxis = 0
+      widthAxis = 1
+      channelAxis = -1 // Never be used
     } else {
+      // Expected shape for color is (channels, height, width)
       channelAxis = 0
       heightAxis = 1
       widthAxis = 2
