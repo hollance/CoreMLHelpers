@@ -47,7 +47,7 @@ extension UIImage {
      - Parameters:
      - angle: Angle degree (0-360).
      */
-    public func rotate(angle:CGFloat)->UIImage
+    @nonobjc public func rotate(angle:CGFloat)->UIImage
     {
         let radians = CGFloat(angle * .pi) / 180.0 as CGFloat
         
