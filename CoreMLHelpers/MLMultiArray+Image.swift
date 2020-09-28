@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2017-2019 M.I. Hollemans
+  Copyright (c) 2017-2020 M.I. Hollemans
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -268,20 +268,26 @@ public func createCGImage(fromFloatArray features: MLMultiArray,
                                 rowBytes: srcRowBytes)
 
   let destRowBytes = width * 4
-  var pixels = [UInt8](repeating: 0, count: height * destRowBytes)
-  var destBuffer = vImage_Buffer(data: &pixels,
-                                 height: vImagePixelCount(height),
-                                 width: vImagePixelCount(width),
-                                 rowBytes: destRowBytes)
 
-  let error = vImageConvert_PlanarFToBGRX8888(&blueBuffer,
-                                              &greenBuffer,
-                                              &redBuffer,
-                                              Pixel_8(255),
-                                              &destBuffer,
-                                              [max, max, max],
-                                              [min, min, min],
-                                              vImage_Flags(0))
+  var error: vImage_Error = 0
+  var pixels = [UInt8](repeating: 0, count: height * destRowBytes)
+
+  pixels.withUnsafeMutableBufferPointer { ptr in
+    var destBuffer = vImage_Buffer(data: ptr.baseAddress!,
+                                   height: vImagePixelCount(height),
+                                   width: vImagePixelCount(width),
+                                   rowBytes: destRowBytes)
+
+    error = vImageConvert_PlanarFToBGRX8888(&blueBuffer,
+                                            &greenBuffer,
+                                            &redBuffer,
+                                            Pixel_8(255),
+                                            &destBuffer,
+                                            [max, max, max],
+                                            [min, min, min],
+                                            vImage_Flags(0))
+  }
+
   if error == kvImageNoError {
     return CGImage.fromByteArrayRGBA(pixels, width: width, height: height)
   } else {

@@ -45,7 +45,7 @@ class MultiArrayTests: XCTestCase {
       ptr.advanced(by: i).pointee = Double(i)
     }
 
-    var a = MultiArray<Double>(coreMLArray)
+    let a = MultiArray<Double>(coreMLArray)
     XCTAssertEqual(a.shape, [1, 1, 48, 17, 27])
     XCTAssertEqual(a.strides, [22032, 22032, 459, 27, 1])
 
@@ -61,7 +61,7 @@ class MultiArrayTests: XCTestCase {
       }
     }
 
-    var b = a.transposed([0, 1, 3, 4, 2])
+    let b = a.transposed([0, 1, 3, 4, 2])
     XCTAssertEqual(b.shape, [1, 1, 17, 27, 48])
     XCTAssertEqual(b.strides, [22032, 22032, 27, 1, 459])
 
@@ -96,7 +96,7 @@ class MultiArrayTests: XCTestCase {
       }
     }
 
-    var c = b.reshaped([5508, 4])
+    let c = b.reshaped([5508, 4])
     XCTAssertEqual(c.shape, [5508, 4])
     XCTAssertEqual(c.strides, [4, 1])
 

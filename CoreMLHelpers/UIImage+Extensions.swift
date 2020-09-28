@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2017-2019 M.I. Hollemans
+  Copyright (c) 2017-2020 M.I. Hollemans
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -28,8 +28,7 @@ extension UIImage {
   /**
     Resizes the image.
 
-    - Parameters:
-      - scale: If this is 1, `newSize` is the size in pixels.
+    - Parameter scale: If this is 1, `newSize` is the size in pixels.
   */
   @nonobjc public func resized(to newSize: CGSize, scale: CGFloat = 1) -> UIImage {
     let format = UIGraphicsImageRendererFormat.default()
@@ -40,29 +39,30 @@ extension UIImage {
     }
     return image
   }
+
   /**
     Rotates the image.
 
-    - Parameters:
-      - degrees: Rotation angle in degrees.
+    - Parameter degrees: Rotation angle in degrees.
   */
-  @nonobjc public func rotate(degrees: CGFloat) -> UIImage {
-      let radians = CGFloat(degrees * .pi) / 180.0 as CGFloat
-      var newSize = CGRect(origin: CGPoint.zero, size: self.size).applying(CGAffineTransform(rotationAngle: radians)).size
-      // Trim off the extremely small float value to prevent core graphics from rounding it up
-      newSize.width = floor(newSize.width)
-      newSize.height = floor(newSize.height)
-      let renderer = UIGraphicsImageRenderer(size:self.size)
-      let image = renderer.image { rendererContext in
-          let context = rendererContext.cgContext
-          //rotate from center
-          context.translateBy(x: newSize.width/2, y: newSize.height/2)
-          context.rotate(by: radians)
-          draw(in:  CGRect(origin: CGPoint(x: -self.size.width/2, y: -self.size.height/2), size: size))
-      }
-      return image
-  }
+  @nonobjc public func rotated(by degrees: CGFloat) -> UIImage {
+    let radians = degrees * .pi / 180
+    let newRect = CGRect(origin: .zero, size: size).applying(CGAffineTransform(rotationAngle: radians))
 
+    // Trim off the extremely small float value to prevent Core Graphics from rounding it up.
+    var newSize = newRect.size
+    newSize.width = floor(newSize.width)
+    newSize.height = floor(newSize.height)
+
+    return UIGraphicsImageRenderer(size: size).image { rendererContext in
+      let context = rendererContext.cgContext
+      // Rotate around center.
+      context.translateBy(x: newSize.width / 2, y: newSize.height / 2)
+      context.rotate(by: radians)
+      let origin = CGPoint(x: -size.width/2, y: -size.height/2)
+      draw(in: CGRect(origin: origin, size: size))
+    }
+  }
 }
 
 #endif

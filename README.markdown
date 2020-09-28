@@ -54,4 +54,4 @@ Not sure how this works, I never use CocoaPods.
 
 ## License
 
-CoreMLHelpers is copyright 2017-2019 Matthijs Hollemans and is licensed under the terms of the [MIT license](LICENSE.txt).
+CoreMLHelpers is copyright 2017-2020 Matthijs Hollemans and is licensed under the terms of the [MIT license](LICENSE.txt).
