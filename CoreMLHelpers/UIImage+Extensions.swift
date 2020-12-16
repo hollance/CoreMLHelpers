@@ -52,7 +52,7 @@ extension UIImage {
       // Trim off the extremely small float value to prevent core graphics from rounding it up
       newSize.width = floor(newSize.width)
       newSize.height = floor(newSize.height)
-      let renderer = UIGraphicsImageRenderer(size:self.size)
+      let renderer = UIGraphicsImageRenderer(size:newSize)
       let image = renderer.image { rendererContext in
           let context = rendererContext.cgContext
           //rotate from center
