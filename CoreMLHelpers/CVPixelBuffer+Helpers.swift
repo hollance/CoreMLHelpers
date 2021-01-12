@@ -137,8 +137,6 @@ public func resizePixelBuffer(_ pixelBuffer: CVPixelBuffer,
 /**
   Rotates CVPixelBuffer by the provided factor of 90 counterclock-wise.
 
-  - Note: The new CVPixelBuffer is not backed by an IOSurface and therefore
-    cannot be turned into a Metal texture.
 */
 public func rotate90PixelBuffer(_ srcPixelBuffer: CVPixelBuffer, factor: UInt8) -> CVPixelBuffer? {
   let flags = CVPixelBufferLockFlags(rawValue: 0)
@@ -161,46 +159,46 @@ public func rotate90PixelBuffer(_ srcPixelBuffer: CVPixelBuffer, factor: UInt8) 
     destWidth = sourceWidth
     destHeight = sourceHeight
   }
-
   let srcBytesPerRow = CVPixelBufferGetBytesPerRow(srcPixelBuffer)
   var srcBuffer = vImage_Buffer(data: srcData,
                                 height: vImagePixelCount(sourceHeight),
                                 width: vImagePixelCount(sourceWidth),
                                 rowBytes: srcBytesPerRow)
-
   let destBytesPerRow = destWidth*4
-  guard let destData = malloc(destHeight*destBytesPerRow) else {
-    print("Error: out of memory")
-    return nil
-  }
-  var destBuffer = vImage_Buffer(data: destData,
-                                 height: vImagePixelCount(destHeight),
-                                 width: vImagePixelCount(destWidth),
-                                 rowBytes: destBytesPerRow)
-
-  let error = vImageRotate90_ARGB8888(&srcBuffer, &destBuffer, factor, &color, vImage_Flags(0))
-  if error != kvImageNoError {
-    print("Error:", error)
-    free(destData)
-    return nil
-  }
-
-  let releaseCallback: CVPixelBufferReleaseBytesCallback = { _, ptr in
-    if let ptr = ptr {
-      free(UnsafeMutableRawPointer(mutating: ptr))
-    }
-  }
+  let ioSurfaceProps = [
+    kCVPixelBufferIOSurfaceOpenGLESTextureCompatibilityKey: true as CFBoolean,
+    kCVPixelBufferIOSurfaceOpenGLESFBOCompatibilityKey: true as CFBoolean,
+    kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey: true as CFBoolean
+  ] as CFDictionary
+  
+  let options = [
+    String(kCVPixelBufferMetalCompatibilityKey): true as CFBoolean,
+    String(kCVPixelBufferIOSurfacePropertiesKey): ioSurfaceProps
+  ] as CFDictionary
 
   let pixelFormat = CVPixelBufferGetPixelFormatType(srcPixelBuffer)
   var dstPixelBuffer: CVPixelBuffer?
-  let status = CVPixelBufferCreateWithBytes(nil, destWidth, destHeight,
-                                            pixelFormat, destData,
-                                            destBytesPerRow, releaseCallback,
-                                            nil, nil, &dstPixelBuffer)
+  let status = CVPixelBufferCreate(nil, destWidth, destHeight,
+                                   pixelFormat, options, &dstPixelBuffer)
+        
   if status != kCVReturnSuccess {
     print("Error: could not create new pixel buffer")
-    free(destData)
     return nil
+  }
+  if let realDst = dstPixelBuffer {
+    CVPixelBufferLockBaseAddress(realDst, [])
+    guard let destData = CVPixelBufferGetBaseAddress(realDst) else { return nil }
+    var destBuffer = vImage_Buffer(data: destData,
+                                   height: vImagePixelCount(destHeight),
+                                   width: vImagePixelCount(destWidth),
+                                   rowBytes: destBytesPerRow)
+    let error = vImageRotate90_ARGB8888(&srcBuffer, &destBuffer, factor, &color, vImage_Flags(0))
+    CVPixelBufferUnlockBaseAddress(realDst, [])
+    if error != kvImageNoError {
+      print("Error: could not rotate into new pixel buffer")
+      return nil
+    }
+    CVBufferPropagateAttachments(self, realDst)
   }
   return dstPixelBuffer
 }
