@@ -101,6 +101,8 @@ public func resizePixelBuffer(_ srcPixelBuffer: CVPixelBuffer,
                                          pixelFormat: pixelFormat)
 
   if let dstPixelBuffer = dstPixelBuffer {
+    CVBufferPropagateAttachments(srcPixelBuffer, dstPixelBuffer)
+
     resizePixelBuffer(from: srcPixelBuffer, to: dstPixelBuffer,
                       cropX: cropX, cropY: cropY,
                       cropWidth: cropWidth, cropHeight: cropHeight,

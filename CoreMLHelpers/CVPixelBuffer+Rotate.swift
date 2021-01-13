@@ -94,6 +94,7 @@ public func rotate90PixelBuffer(_ srcPixelBuffer: CVPixelBuffer, factor: UInt8) 
   let dstPixelBuffer = createPixelBuffer(width: dstWidth, height: dstHeight, pixelFormat: pixelFormat)
 
   if let dstPixelBuffer = dstPixelBuffer {
+    CVBufferPropagateAttachments(srcPixelBuffer, dstPixelBuffer)
     rotate90PixelBuffer(from: srcPixelBuffer, to: dstPixelBuffer, factor: factor)
   }
   return dstPixelBuffer
