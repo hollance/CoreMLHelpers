@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2017-2019 M.I. Hollemans
+  Copyright (c) 2017-2021 M.I. Hollemans
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -44,7 +44,7 @@ extension Array where Element: Comparable {
     Returns the indices of the array's elements in sorted order.
   */
   public func argsort(by areInIncreasingOrder: (Element, Element) -> Bool) -> [Array.Index] {
-    return self.indices.sorted { areInIncreasingOrder(self[$0], self[$1]) }
+    return indices.sorted { areInIncreasingOrder(self[$0], self[$1]) }
   }
 
   /**
