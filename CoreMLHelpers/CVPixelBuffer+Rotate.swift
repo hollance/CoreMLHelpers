@@ -24,72 +24,77 @@ import Foundation
 import Accelerate
 
 /**
-  Rotates CVPixelBuffer by the provided factor of 90 counterclock-wise.
+  Rotates a CVPixelBuffer by the provided factor of 90 counterclock-wise.
 
-  - Note: The new CVPixelBuffer is not backed by an IOSurface and therefore
-    cannot be turned into a Metal texture.
+  This function requires the caller to pass in both the source and destination
+  pixel buffers. The width and height of destination pixel buffer should be the
+  opposite of the source's dimensions if rotating by 90 or 270 degrees.
 */
-public func rotate90PixelBuffer(_ srcPixelBuffer: CVPixelBuffer, factor: UInt8) -> CVPixelBuffer? {
-  let flags = CVPixelBufferLockFlags(rawValue: 0)
-  guard kCVReturnSuccess == CVPixelBufferLockBaseAddress(srcPixelBuffer, flags) else {
-    return nil
-  }
-  defer { CVPixelBufferUnlockBaseAddress(srcPixelBuffer, flags) }
+public func rotate90PixelBuffer(from srcPixelBuffer: CVPixelBuffer,
+                                to dstPixelBuffer: CVPixelBuffer,
+                                factor: UInt8) {
+  let srcFlags = CVPixelBufferLockFlags.readOnly
+  let dstFlags = CVPixelBufferLockFlags(rawValue: 0)
 
-  guard let srcData = CVPixelBufferGetBaseAddress(srcPixelBuffer) else {
+  guard kCVReturnSuccess == CVPixelBufferLockBaseAddress(srcPixelBuffer, srcFlags) else {
+    print("Error: could not lock source pixel buffer")
+    return
+  }
+  defer { CVPixelBufferUnlockBaseAddress(srcPixelBuffer, srcFlags) }
+
+  guard kCVReturnSuccess == CVPixelBufferLockBaseAddress(dstPixelBuffer, dstFlags) else {
+    print("Error: could not lock destination pixel buffer")
+    return
+  }
+  defer { CVPixelBufferUnlockBaseAddress(dstPixelBuffer, dstFlags) }
+
+  guard let srcData = CVPixelBufferGetBaseAddress(srcPixelBuffer),
+        let dstData = CVPixelBufferGetBaseAddress(dstPixelBuffer) else {
     print("Error: could not get pixel buffer base address")
-    return nil
+    return
   }
-  let sourceWidth = CVPixelBufferGetWidth(srcPixelBuffer)
-  let sourceHeight = CVPixelBufferGetHeight(srcPixelBuffer)
-  var destWidth = sourceHeight
-  var destHeight = sourceWidth
-  var color = UInt8(0)
 
-  if factor % 2 == 0 {
-    destWidth = sourceWidth
-    destHeight = sourceHeight
-  }
+  let srcWidth = CVPixelBufferGetWidth(srcPixelBuffer)
+  let srcHeight = CVPixelBufferGetHeight(srcPixelBuffer)
 
   let srcBytesPerRow = CVPixelBufferGetBytesPerRow(srcPixelBuffer)
   var srcBuffer = vImage_Buffer(data: srcData,
-                                height: vImagePixelCount(sourceHeight),
-                                width: vImagePixelCount(sourceWidth),
+                                height: vImagePixelCount(srcHeight),
+                                width: vImagePixelCount(srcWidth),
                                 rowBytes: srcBytesPerRow)
 
-  let destBytesPerRow = destWidth*4
-  guard let destData = malloc(destHeight*destBytesPerRow) else {
-    print("Error: out of memory")
-    return nil
-  }
-  var destBuffer = vImage_Buffer(data: destData,
-                                 height: vImagePixelCount(destHeight),
-                                 width: vImagePixelCount(destWidth),
-                                 rowBytes: destBytesPerRow)
+  let dstWidth = CVPixelBufferGetWidth(dstPixelBuffer)
+  let dstHeight = CVPixelBufferGetHeight(dstPixelBuffer)
+  let dstBytesPerRow = CVPixelBufferGetBytesPerRow(dstPixelBuffer)
+  var dstBuffer = vImage_Buffer(data: dstData,
+                                height: vImagePixelCount(dstHeight),
+                                width: vImagePixelCount(dstWidth),
+                                rowBytes: dstBytesPerRow)
 
-  let error = vImageRotate90_ARGB8888(&srcBuffer, &destBuffer, factor, &color, vImage_Flags(0))
+  var color = UInt8(0)
+  let error = vImageRotate90_ARGB8888(&srcBuffer, &dstBuffer, factor, &color, vImage_Flags(0))
   if error != kvImageNoError {
     print("Error:", error)
-    free(destData)
-    return nil
   }
+}
 
-  let releaseCallback: CVPixelBufferReleaseBytesCallback = { _, ptr in
-    if let ptr = ptr {
-      free(UnsafeMutableRawPointer(mutating: ptr))
-    }
+/**
+  Rotates a CVPixelBuffer by the provided factor of 90 counterclock-wise.
+
+  This allocates a new destination pixel buffer that is Metal-compatible.
+*/
+public func rotate90PixelBuffer(_ srcPixelBuffer: CVPixelBuffer, factor: UInt8) -> CVPixelBuffer? {
+  var dstWidth = CVPixelBufferGetWidth(srcPixelBuffer)
+  var dstHeight = CVPixelBufferGetHeight(srcPixelBuffer)
+  if factor % 2 == 1 {
+    swap(&dstWidth, &dstHeight)
   }
 
   let pixelFormat = CVPixelBufferGetPixelFormatType(srcPixelBuffer)
-  var dstPixelBuffer: CVPixelBuffer?
-  let status = CVPixelBufferCreateWithBytes(nil, destWidth, destHeight,
-                                            pixelFormat, destData,
-                                            destBytesPerRow, releaseCallback,
-                                            nil, nil, &dstPixelBuffer)
-  if status != kCVReturnSuccess {
-    print("Error: could not create new pixel buffer")
-    free(destData)
-    return nil
+  let dstPixelBuffer = createPixelBuffer(width: dstWidth, height: dstHeight, pixelFormat: pixelFormat)
+
+  if let dstPixelBuffer = dstPixelBuffer {
+    rotate90PixelBuffer(from: srcPixelBuffer, to: dstPixelBuffer, factor: factor)
   }
   return dstPixelBuffer
 }

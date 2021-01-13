@@ -33,6 +33,15 @@ class MenuViewController: UITableViewController {
       // Test resizing of pixel buffer.
       if let resizedPixelBuffer = resizePixelBuffer(pixelBuffer, width: 200, height: 300) {
 
+        /*
+        // Enable this to test the rotation code:
+        if let rotatedPixelBuffer = rotate90PixelBuffer(resizedPixelBuffer, factor: 1) {
+          if let image = UIImage(pixelBuffer: rotatedPixelBuffer) {
+            return image
+          }
+        }
+        */
+
         // Convert back to image.
         if let image = UIImage(pixelBuffer: resizedPixelBuffer) {
           return image
