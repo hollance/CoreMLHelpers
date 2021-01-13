@@ -26,7 +26,15 @@ import VideoToolbox
 
 extension CGImage {
   /**
-    Resizes the image to width x height and converts it to an RGB CVPixelBuffer.
+    Converts the image to an ARGB `CVPixelBuffer`.
+  */
+  public func pixelBuffer() -> CVPixelBuffer? {
+    return pixelBuffer(width: width, height: height, orientation: .up)
+  }
+
+  /**
+    Resizes the image to `width` x `height` and converts it to an ARGB
+    `CVPixelBuffer`.
   */
   public func pixelBuffer(width: Int, height: Int,
                           orientation: CGImagePropertyOrientation) -> CVPixelBuffer? {
@@ -38,7 +46,15 @@ extension CGImage {
   }
 
   /**
-    Resizes the image to width x height and converts it to a grayscale CVPixelBuffer.
+    Converts the image to a grayscale `CVPixelBuffer`.
+  */
+  public func pixelBufferGray() -> CVPixelBuffer? {
+    return pixelBufferGray(width: width, height: height, orientation: .up)
+  }
+
+  /**
+    Resizes the image to `width` x `height` and converts it to a grayscale
+    `CVPixelBuffer`.
   */
   public func pixelBufferGray(width: Int, height: Int,
                               orientation: CGImagePropertyOrientation) -> CVPixelBuffer? {
@@ -50,8 +66,8 @@ extension CGImage {
   }
 
   /**
-    Resizes the image to width x height and converts it to a CVPixelBuffer with
-    the specified pixel format, color space, and alpha channel.
+    Resizes the image to `width` x `height` and converts it to a `CVPixelBuffer`
+    with the specified pixel format, color space, and alpha channel.
   */
   public func pixelBuffer(width: Int, height: Int,
                           pixelFormatType: OSType,
