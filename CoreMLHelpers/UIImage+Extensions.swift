@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2017-2020 M.I. Hollemans
+  Copyright (c) 2017-2021 M.I. Hollemans
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -41,25 +41,29 @@ extension UIImage {
   }
 
   /**
-    Rotates the image.
+    Rotates the image around its center.
 
     - Parameter degrees: Rotation angle in degrees.
+    - Parameter keepSize: If true, the new image has the size of the original
+      image, so portions may be cropped off. If false, the new image expands
+      to fit all the pixels.
   */
-  @nonobjc public func rotated(by degrees: CGFloat) -> UIImage {
+  @nonobjc public func rotated(by degrees: CGFloat, keepSize: Bool = true) -> UIImage {
     let radians = degrees * .pi / 180
     let newRect = CGRect(origin: .zero, size: size).applying(CGAffineTransform(rotationAngle: radians))
 
     // Trim off the extremely small float value to prevent Core Graphics from rounding it up.
-    var newSize = newRect.size
+    var newSize = keepSize ? size : newRect.size
     newSize.width = floor(newSize.width)
     newSize.height = floor(newSize.height)
 
-    return UIGraphicsImageRenderer(size: size).image { rendererContext in
+    return UIGraphicsImageRenderer(size: newSize).image { rendererContext in
       let context = rendererContext.cgContext
-      // Rotate around center.
+      context.setFillColor(UIColor.black.cgColor)
+      context.fill(CGRect(origin: .zero, size: newSize))
       context.translateBy(x: newSize.width / 2, y: newSize.height / 2)
       context.rotate(by: radians)
-      let origin = CGPoint(x: -size.width/2, y: -size.height/2)
+      let origin = CGPoint(x: -size.width / 2, y: -size.height / 2)
       draw(in: CGRect(origin: origin, size: size))
     }
   }
