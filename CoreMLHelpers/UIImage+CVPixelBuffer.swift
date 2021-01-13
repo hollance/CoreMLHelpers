@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2017-2019 M.I. Hollemans
+  Copyright (c) 2017-2021 M.I. Hollemans
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -46,8 +46,14 @@ extension UIImage {
                        alphaInfo: .none)
   }
 
-  func pixelBuffer(width: Int, height: Int, pixelFormatType: OSType,
-                   colorSpace: CGColorSpace, alphaInfo: CGImageAlphaInfo) -> CVPixelBuffer? {
+  /**
+    Resizes the image to width x height and converts it to a CVPixelBuffer with
+    the specified pixel format, color space, and alpha channel.
+  */
+  public func pixelBuffer(width: Int, height: Int,
+                          pixelFormatType: OSType,
+                          colorSpace: CGColorSpace,
+                          alphaInfo: CGImageAlphaInfo) -> CVPixelBuffer? {
     var maybePixelBuffer: CVPixelBuffer?
     let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue,
                  kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue]

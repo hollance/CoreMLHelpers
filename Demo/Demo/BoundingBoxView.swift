@@ -1,11 +1,11 @@
 import Foundation
 import UIKit
 
-class BoundingBoxView {
+public class BoundingBoxView {
   let shapeLayer: CAShapeLayer
   let textLayer: CATextLayer
 
-  init() {
+  public init() {
     shapeLayer = CAShapeLayer()
     shapeLayer.fillColor = UIColor.clear.cgColor
     shapeLayer.lineWidth = 4
@@ -19,12 +19,12 @@ class BoundingBoxView {
     textLayer.alignmentMode = CATextLayerAlignmentMode.center
   }
 
-  func addToLayer(_ parent: CALayer) {
+  public func addToLayer(_ parent: CALayer) {
     parent.addSublayer(shapeLayer)
     parent.addSublayer(textLayer)
   }
 
-  func show(frame: CGRect, label: String, color: UIColor, textColor: UIColor = .black) {
+  public func show(frame: CGRect, label: String, color: UIColor, textColor: UIColor = .black) {
     CATransaction.setDisableActions(true)
 
     let path = UIBezierPath(rect: frame)
@@ -49,7 +49,7 @@ class BoundingBoxView {
     textLayer.frame = CGRect(origin: textOrigin, size: textSize)
   }
 
-  func hide() {
+  public func hide() {
     shapeLayer.isHidden = true
     textLayer.isHidden = true
   }
