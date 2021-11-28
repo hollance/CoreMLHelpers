@@ -25,11 +25,11 @@
 import UIKit
 import VideoToolbox
 
-extension UIImage {
+ public extension UIImage {
   /**
     Converts the image to an ARGB `CVPixelBuffer`.
   */
-  public func pixelBuffer() -> CVPixelBuffer? {
+  func pixelBuffer() -> CVPixelBuffer? {
     return pixelBuffer(width: Int(size.width), height: Int(size.height))
   }
 
@@ -37,7 +37,7 @@ extension UIImage {
     Resizes the image to `width` x `height` and converts it to an ARGB
     `CVPixelBuffer`.
   */
-  public func pixelBuffer(width: Int, height: Int) -> CVPixelBuffer? {
+   func pixelBuffer(width: Int, height: Int) -> CVPixelBuffer? {
     return pixelBuffer(width: width, height: height,
                        pixelFormatType: kCVPixelFormatType_32ARGB,
                        colorSpace: CGColorSpaceCreateDeviceRGB(),
@@ -47,7 +47,7 @@ extension UIImage {
   /**
     Converts the image to a grayscale `CVPixelBuffer`.
   */
-  public func pixelBufferGray() -> CVPixelBuffer? {
+  func pixelBufferGray() -> CVPixelBuffer? {
     return pixelBufferGray(width: Int(size.width), height: Int(size.height))
   }
 
@@ -55,7 +55,7 @@ extension UIImage {
     Resizes the image to `width` x `height` and converts it to a grayscale
     `CVPixelBuffer`.
   */
-  public func pixelBufferGray(width: Int, height: Int) -> CVPixelBuffer? {
+  func pixelBufferGray(width: Int, height: Int) -> CVPixelBuffer? {
     return pixelBuffer(width: width, height: height,
                        pixelFormatType: kCVPixelFormatType_OneComponent8,
                        colorSpace: CGColorSpaceCreateDeviceGray(),
@@ -66,7 +66,7 @@ extension UIImage {
     Resizes the image to `width` x `height` and converts it to a `CVPixelBuffer`
     with the specified pixel format, color space, and alpha channel.
   */
-  public func pixelBuffer(width: Int, height: Int,
+   func pixelBuffer(width: Int, height: Int,
                           pixelFormatType: OSType,
                           colorSpace: CGColorSpace,
                           alphaInfo: CGImageAlphaInfo) -> CVPixelBuffer? {
@@ -111,14 +111,14 @@ extension UIImage {
   }
 }
 
-extension UIImage {
+public extension UIImage {
   /**
     Creates a new UIImage from a CVPixelBuffer.
 
     - Note: Not all CVPixelBuffer pixel formats support conversion into a
             CGImage-compatible pixel format.
   */
-  public convenience init?(pixelBuffer: CVPixelBuffer) {
+ convenience init?(pixelBuffer: CVPixelBuffer) {
     if let cgImage = CGImage.create(pixelBuffer: pixelBuffer) {
       self.init(cgImage: cgImage)
     } else {

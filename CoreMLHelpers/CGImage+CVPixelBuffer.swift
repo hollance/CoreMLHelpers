@@ -24,11 +24,11 @@ import CoreGraphics
 import CoreImage
 import VideoToolbox
 
-extension CGImage {
+ public extension CGImage {
   /**
     Converts the image to an ARGB `CVPixelBuffer`.
   */
-  public func pixelBuffer() -> CVPixelBuffer? {
+  func pixelBuffer() -> CVPixelBuffer? {
     return pixelBuffer(width: width, height: height, orientation: .up)
   }
 
@@ -36,7 +36,7 @@ extension CGImage {
     Resizes the image to `width` x `height` and converts it to an ARGB
     `CVPixelBuffer`.
   */
-  public func pixelBuffer(width: Int, height: Int,
+ func pixelBuffer(width: Int, height: Int,
                           orientation: CGImagePropertyOrientation) -> CVPixelBuffer? {
     return pixelBuffer(width: width, height: height,
                        pixelFormatType: kCVPixelFormatType_32ARGB,
@@ -48,7 +48,7 @@ extension CGImage {
   /**
     Converts the image to a grayscale `CVPixelBuffer`.
   */
-  public func pixelBufferGray() -> CVPixelBuffer? {
+  func pixelBufferGray() -> CVPixelBuffer? {
     return pixelBufferGray(width: width, height: height, orientation: .up)
   }
 
@@ -56,7 +56,7 @@ extension CGImage {
     Resizes the image to `width` x `height` and converts it to a grayscale
     `CVPixelBuffer`.
   */
-  public func pixelBufferGray(width: Int, height: Int,
+ func pixelBufferGray(width: Int, height: Int,
                               orientation: CGImagePropertyOrientation) -> CVPixelBuffer? {
     return pixelBuffer(width: width, height: height,
                        pixelFormatType: kCVPixelFormatType_OneComponent8,
@@ -69,7 +69,7 @@ extension CGImage {
     Resizes the image to `width` x `height` and converts it to a `CVPixelBuffer`
     with the specified pixel format, color space, and alpha channel.
   */
-  public func pixelBuffer(width: Int, height: Int,
+  func pixelBuffer(width: Int, height: Int,
                           pixelFormatType: OSType,
                           colorSpace: CGColorSpace,
                           alphaInfo: CGImageAlphaInfo,
@@ -115,14 +115,14 @@ extension CGImage {
   }
 }
 
-extension CGImage {
+ public extension CGImage {
   /**
     Creates a new CGImage from a CVPixelBuffer.
 
     - Note: Not all CVPixelBuffer pixel formats support conversion into a
             CGImage-compatible pixel format.
   */
-  public static func create(pixelBuffer: CVPixelBuffer) -> CGImage? {
+  static func create(pixelBuffer: CVPixelBuffer) -> CGImage? {
     var cgImage: CGImage?
     VTCreateCGImageFromCVPixelBuffer(pixelBuffer, options: nil, imageOut: &cgImage)
     return cgImage
@@ -159,7 +159,7 @@ extension CGImage {
   /**
    Creates a new CGImage from a CVPixelBuffer, using Core Image.
   */
-  public static func create(pixelBuffer: CVPixelBuffer, context: CIContext) -> CGImage? {
+  static func create(pixelBuffer: CVPixelBuffer, context: CIContext) -> CGImage? {
     let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
     let rect = CGRect(x: 0, y: 0, width: CVPixelBufferGetWidth(pixelBuffer),
                                   height: CVPixelBufferGetHeight(pixelBuffer))
