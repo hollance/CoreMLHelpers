@@ -23,6 +23,7 @@
 import Foundation
 import Accelerate
 import CoreImage
+import SwiftUI
 
 /**
   First crops the pixel buffer, then resizes it.
@@ -38,7 +39,8 @@ public func resizePixelBuffer(from srcPixelBuffer: CVPixelBuffer,
                               cropWidth: Int,
                               cropHeight: Int,
                               scaleWidth: Int,
-                              scaleHeight: Int) {
+                              scaleHeight: Int,
+                              contentMode: ContentMode) {
 
   assert(CVPixelBufferGetWidth(dstPixelBuffer) >= scaleWidth)
   assert(CVPixelBufferGetHeight(dstPixelBuffer) >= scaleHeight)
@@ -72,10 +74,40 @@ public func resizePixelBuffer(from srcPixelBuffer: CVPixelBuffer,
                                 rowBytes: srcBytesPerRow)
 
   let dstBytesPerRow = CVPixelBufferGetBytesPerRow(dstPixelBuffer)
-  var dstBuffer = vImage_Buffer(data: dstData,
-                                height: vImagePixelCount(scaleHeight),
-                                width: vImagePixelCount(scaleWidth),
-                                rowBytes: dstBytesPerRow)
+  var dstBuffer : vImage_Buffer
+  if contentMode == .fit {
+      let dstBytesPerRow = CVPixelBufferGetBytesPerRow(dstPixelBuffer)
+      
+      let fitWidth = cropWidth > cropHeight
+      let startX: Int
+      let startY: Int
+      let fittedHeight: Int
+      let fittedWidth: Int
+      if fitWidth {
+          let fitScale = Float(scaleWidth) / Float(cropWidth)
+          fittedHeight = Int(Float(cropHeight) * fitScale)
+          fittedWidth = scaleWidth
+          startX = 0
+          startY = Int(Float(scaleHeight - fittedHeight) / 2.0)
+      } else {
+          let fitScale = Float(scaleHeight) / Float(cropHeight)
+          fittedHeight = scaleHeight
+          fittedWidth = Int(Float(cropWidth) * fitScale)
+          startX = Int(Float(scaleWidth - fittedWidth) / 2.0)
+          startY = 0
+      }
+      let offset = 4 * (dstBytesPerRow * startY + startX)
+
+      dstBuffer = vImage_Buffer(data: dstData + offset,
+                              height: vImagePixelCount(fittedHeight),
+                              width: vImagePixelCount(fittedWidth),
+                              rowBytes: dstBytesPerRow)
+  } else {
+      dstBuffer = vImage_Buffer(data: dstData,
+                              height: vImagePixelCount(scaleHeight),
+                              width: vImagePixelCount(scaleWidth),
+                              rowBytes: dstBytesPerRow)
+  }
 
   let error = vImageScale_ARGB8888(&srcBuffer, &dstBuffer, nil, vImage_Flags(0))
   if error != kvImageNoError {
@@ -94,7 +126,8 @@ public func resizePixelBuffer(_ srcPixelBuffer: CVPixelBuffer,
                               cropWidth: Int,
                               cropHeight: Int,
                               scaleWidth: Int,
-                              scaleHeight: Int) -> CVPixelBuffer? {
+                              scaleHeight: Int,
+                              contentMode: ContentMode) -> CVPixelBuffer? {
 
   let pixelFormat = CVPixelBufferGetPixelFormatType(srcPixelBuffer)
   let dstPixelBuffer = createPixelBuffer(width: scaleWidth, height: scaleHeight,
@@ -106,7 +139,8 @@ public func resizePixelBuffer(_ srcPixelBuffer: CVPixelBuffer,
     resizePixelBuffer(from: srcPixelBuffer, to: dstPixelBuffer,
                       cropX: cropX, cropY: cropY,
                       cropWidth: cropWidth, cropHeight: cropHeight,
-                      scaleWidth: scaleWidth, scaleHeight: scaleHeight)
+                      scaleWidth: scaleWidth, scaleHeight: scaleHeight,
+                      contentMode: contentMode)
   }
 
   return dstPixelBuffer
@@ -121,12 +155,13 @@ public func resizePixelBuffer(_ srcPixelBuffer: CVPixelBuffer,
 */
 public func resizePixelBuffer(from srcPixelBuffer: CVPixelBuffer,
                               to dstPixelBuffer: CVPixelBuffer,
-                              width: Int, height: Int) {
+                              width: Int, height: Int, contentMode: ContentMode) {
   resizePixelBuffer(from: srcPixelBuffer, to: dstPixelBuffer,
                     cropX: 0, cropY: 0,
                     cropWidth: CVPixelBufferGetWidth(srcPixelBuffer),
                     cropHeight: CVPixelBufferGetHeight(srcPixelBuffer),
-                    scaleWidth: width, scaleHeight: height)
+                    scaleWidth: width, scaleHeight: height,
+                    contentMode: contentMode)
 }
 
 /**
@@ -135,11 +170,13 @@ public func resizePixelBuffer(from srcPixelBuffer: CVPixelBuffer,
   This allocates a new destination pixel buffer that is Metal-compatible.
 */
 public func resizePixelBuffer(_ pixelBuffer: CVPixelBuffer,
-                              width: Int, height: Int) -> CVPixelBuffer? {
+                              width: Int, height: Int,
+                              contentMode: ContentMode = .fill) -> CVPixelBuffer? {
   return resizePixelBuffer(pixelBuffer, cropX: 0, cropY: 0,
                            cropWidth: CVPixelBufferGetWidth(pixelBuffer),
                            cropHeight: CVPixelBufferGetHeight(pixelBuffer),
-                           scaleWidth: width, scaleHeight: height)
+                           scaleWidth: width, scaleHeight: height,
+                           contentMode: contentMode)
 }
 
 /**
