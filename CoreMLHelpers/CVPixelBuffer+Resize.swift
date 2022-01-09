@@ -96,7 +96,7 @@ public func resizePixelBuffer(from srcPixelBuffer: CVPixelBuffer,
           startX = Int(Float(scaleWidth - fittedWidth) / 2.0)
           startY = 0
       }
-      let offset = 4 * (dstBytesPerRow * startY + startX)
+      let offset = startY * dstBytesPerRow + startX * 4
 
       dstBuffer = vImage_Buffer(data: dstData + offset,
                               height: vImagePixelCount(fittedHeight),
