@@ -20,6 +20,7 @@
   IN THE SOFTWARE.
 */
 
+#if !os(watchOS)
 import Foundation
 import CoreML
 import Swift
@@ -335,4 +336,5 @@ extension MultiArray {
   }
 }
 
+#endif
 #endif
