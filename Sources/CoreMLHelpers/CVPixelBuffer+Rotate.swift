@@ -19,7 +19,7 @@
   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
   IN THE SOFTWARE.
 */
-
+#if !os(watchOS)
 import Foundation
 import Accelerate
 
@@ -99,3 +99,4 @@ public func rotate90PixelBuffer(_ srcPixelBuffer: CVPixelBuffer, factor: UInt8) 
   }
   return dstPixelBuffer
 }
+#endif

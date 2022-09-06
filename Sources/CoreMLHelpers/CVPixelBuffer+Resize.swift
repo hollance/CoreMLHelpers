@@ -20,6 +20,7 @@
   IN THE SOFTWARE.
 */
 
+#if canImport(CoreImage) && !os(watchOS)
 import Foundation
 import Accelerate
 import CoreImage
@@ -155,3 +156,4 @@ public func resizePixelBuffer(_ pixelBuffer: CVPixelBuffer,
   let scaledImage = ciImage.transformed(by: scaleTransform)
   context.render(scaledImage, to: output)
 }
+#endif

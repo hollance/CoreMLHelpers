@@ -20,10 +20,11 @@
   IN THE SOFTWARE.
 */
 
+#if !os(watchOS)
 import Foundation
 import CoreML
 import Swift
-
+import CoreMLHelpers
 /**
  Wrapper around MLMultiArray to make it more Swifty.
 */
@@ -335,4 +336,5 @@ extension MultiArray {
   }
 }
 
+#endif
 #endif
