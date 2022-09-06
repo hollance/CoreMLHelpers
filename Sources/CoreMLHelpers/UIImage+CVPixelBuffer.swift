@@ -20,7 +20,7 @@
   IN THE SOFTWARE.
 */
 
-#if canImport(UIKit)
+#if canImport(UIKit) && canImport(VideoToolbox)
 
 import UIKit
 import VideoToolbox

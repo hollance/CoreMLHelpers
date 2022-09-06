@@ -20,6 +20,7 @@
   IN THE SOFTWARE.
 */
 
+#if canImport(CoreImage) && !os(watchOS)
 import CoreGraphics
 import CoreImage
 import VideoToolbox
@@ -166,3 +167,4 @@ extension CGImage {
     return context.createCGImage(ciImage, from: rect)
   }
 }
+#endif

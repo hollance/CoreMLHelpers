@@ -20,19 +20,30 @@
   IN THE SOFTWARE.
 */
 
+#if !os(watchOS)
 import Foundation
 import Accelerate
 
 fileprivate func metalCompatiblityAttributes() -> [String: Any] {
+    #if os(macOS)
   let attributes: [String: Any] = [
     String(kCVPixelBufferMetalCompatibilityKey): true,
     String(kCVPixelBufferOpenGLCompatibilityKey): true,
     String(kCVPixelBufferIOSurfacePropertiesKey): [
-      String(kCVPixelBufferIOSurfaceOpenGLESTextureCompatibilityKey): true,
-      String(kCVPixelBufferIOSurfaceOpenGLESFBOCompatibilityKey): true,
       String(kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey): true
     ]
   ]
+    #else
+    let attributes: [String: Any] = [
+        String(kCVPixelBufferMetalCompatibilityKey): true,
+        String(kCVPixelBufferOpenGLCompatibilityKey): true,
+        String(kCVPixelBufferIOSurfacePropertiesKey): [
+            String(kCVPixelBufferIOSurfaceOpenGLESTextureCompatibilityKey): true,
+            String(kCVPixelBufferIOSurfaceOpenGLESFBOCompatibilityKey): true,
+            String(kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey): true
+        ]
+    ]
+    #endif
   return attributes
 }
 
@@ -168,3 +179,4 @@ public extension CVPixelBuffer {
     return dstPixelBuffer
   }
 }
+#endif

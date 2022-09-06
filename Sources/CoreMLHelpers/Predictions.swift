@@ -19,7 +19,7 @@
   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
   IN THE SOFTWARE.
 */
-
+#if canImport(Vision)
 import Vision
 
 /**
@@ -41,3 +41,4 @@ public func top(_ k: Int, _ observations: [VNClassificationObservation]) -> [(St
   return observations.prefix(through: min(k, observations.count) - 1)
                      .map { ($0.identifier, Double($0.confidence)) }
 }
+#endif
